@@ -1,4 +1,51 @@
-{% for video in videos %}
-    <p>{{ video.title }}</p>
+{% extends 'base/main.html' %}
+{% load static %}
+{% block title %}
+  Search
+{% endblock %}
+
+{% block content %}
+    {% include 'base/header.html' %}
+    {% include 'base/sidebar.html' %}
+    <div class="search-view-container">
+			<div class="search-view-filter">
+				<div>
+					<img class="filter-icon" src="{% static 'icons/filter-icon.png' %}">
+				</div>
+				<div class="filter-text">
+					<p>FILTRY</p>
+				</div>
+			</div>
+
+			{% for video in videos %}
+			<div class="search-view-video-grid">
+				<div>
+					<img class="search-view-thumbnail" src="{{ video.thumbnail.url }}">
+				</div>
+				<div class="search-view-video-info">
+					<p class="search-view-video-title">
+						{{ video.title }}
+					</p>
+					<p class="search-view-video-details">
+						{{ video.views }} views &#183; {{ video.uploaded|timesince }} ago
+					</p>
+					<div class="search-view-channel-grid">
+						<div>
+							<img class="search-view-profile-picture" src="{{ video.channel.picture.url }}">
+						</div>
+						<div>
+							<p class="search-view-channel-name">
+								{{ video.channel.name }}
+							</p>
+						</div>
+					</div>
+					<p class="search-view-video-description"> 
+						Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+						Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
+					</p>
+				</div>
+			</div>
+			{% endfor %}
+    </div>
     
-{% endfor %}
+{% endblock %}

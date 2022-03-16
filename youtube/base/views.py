@@ -12,7 +12,8 @@ def search(request):
     q = request.GET.get('q') if request.GET.get('q') != None else ''
 
     videos = Video.objects.filter(
-        Q(title__icontains=q))
+        Q(title__icontains=q)
+        )
    
     context = {'videos': videos}
     return render(request, 'base/search.html', context)

@@ -1,0 +1,43 @@
+{% load static %}
+<div class="header">
+    <div class="left-section">
+        <img class="hamburger-menu" src="{% static 'icons/hamburger-menu.svg' %}">
+        <a href="{% url 'home' %}">
+					<img class="youtube-logo" src="{% static 'icons/youtube-logo.svg'%}">
+				</a>
+    </div>
+    <div class="middle-section">
+        <form method="GET" action="/search">
+            <input class="search-bar" type="text" placeholder="Search" name="q" 
+            value="{% if search_query %}{{ search_query }}{% endif %}" required>
+            <button class="search-button">
+                <img class="search-icon" src="{% static 'icons/search.svg' %}">
+                <div class="tooltip">Search</div>
+            </button>
+        </form>
+        <button class="voice-search-button">
+            <img class="voice-search-icon" src="{% static 'icons/voice-search-icon.svg' %}">
+            <div class="tooltip">Search with your voice</div>
+        </button> 
+          
+    </div>
+    <div class="right-section">
+        <div class="upload-icon-container">
+            <img class="upload-icon" src="{% static 'icons/upload.svg' %}">
+            <div class="tooltip">Create</div>
+        </div>
+        <div class="youtube-apps-icon-container">
+            <img class="youtube-apps-icon" src="{% static 'icons/youtube-apps.svg' %}">
+            <div class="tooltip">YouTube apps</div>
+        </div>
+        
+        <div class="notifications-icon-container">
+            <img class="notification-icon" src="{% static 'icons/notifications.svg' %}">
+            <div class="notifications-count">
+                1
+            </div>
+            <div class="tooltip">Notifications</div>
+        </div>
+        <img class="current-user-picture" src="{% static 'channel-pictures/my-channel.jpeg' %}">
+    </div>
+</div>

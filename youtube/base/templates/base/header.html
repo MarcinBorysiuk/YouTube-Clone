@@ -7,7 +7,7 @@
 				</a>
     </div>
     <div class="middle-section">
-        <form method="GET" action="/search">
+        <form class="search-form" method="GET" action="/search">
             <input class="search-bar" type="text" placeholder="Search" name="q" 
             value="{% if search_query %}{{ search_query }}{% endif %}" required>
             <button class="search-button">
@@ -30,7 +30,7 @@
             <img class="youtube-apps-icon" src="{% static 'icons/youtube-apps.svg' %}">
             <div class="tooltip">YouTube apps</div>
         </div>
-        
+        {% if request.user.is_authenticated %}
         <div class="notifications-icon-container">
             <img class="notification-icon" src="{% static 'icons/notifications.svg' %}">
             <div class="notifications-count">
@@ -38,6 +38,11 @@
             </div>
             <div class="tooltip">Notifications</div>
         </div>
-        <img class="current-user-picture" src="{% static 'channel-pictures/my-channel.jpeg' %}">
+        <a href="{% url 'channel-details' request.user.id %}">
+            <img class="current-user-picture" src="{{ request.user.get_picture_url }}">
+        </a>
+        {% else %}
+        <a class="login-button" href="{% url 'login' %}">LOGIN</a>
+        {% endif %}
     </div>
 </div>

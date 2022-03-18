@@ -1,6 +1,6 @@
 .search-view-container {
-    margin-left: 150px;
-    margin-right: 150px;
+    margin-left: 5%;
+    margin-right: 5%;
 }
 
 .search-view-filter {
@@ -22,6 +22,7 @@
 
 .search-view-thumbnail {
     width: 360px;
+    cursor: pointer;
 }
 
 .search-view-video-grid {
@@ -29,6 +30,19 @@
     grid-template-columns: 360px 1fr;
     column-gap: 12px;
     margin-bottom: 12px;
+}
+
+@media (max-width: 1000px) {
+    .search-view-video-grid {
+        display: grid;
+        grid-template-columns: 270px 1fr;
+        column-gap: 12px;
+        margin-bottom: 12px;
+    }
+
+    .search-view-thumbnail {
+        width: 270px;
+    }
 }
 
 .search-view-video-info {
@@ -39,6 +53,7 @@
     font-size: 20px;
     font-weight: 400;
     margin-bottom: 6px;
+    cursor: pointer;
 }
 
 .search-view-video-details {

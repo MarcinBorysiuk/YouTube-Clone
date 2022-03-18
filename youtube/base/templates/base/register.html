@@ -1,0 +1,30 @@
+{% extends 'base/main.html' %}
+{% load static %}
+{% block content %}
+<div style="display: flex; justify-content: center; padding-bottom: 50px; padding-right: 72px;">
+    <div class="login-view-container">
+        <div class="youtube-logo-container">
+            <img class="youtube-logo" src="{% static 'icons/youtube-logo.svg'%}">
+            <p class="login-text">Register</p>
+        </div>
+        <div class="login-form-container">
+            <form method='POST'>
+                {% csrf_token %}
+                {{ form.username }}
+                {{ form.password1 }}
+                {{ form.password2 }}
+                <button class="red-login-button" type="submit">Register</button>
+            </form>
+            <div class="message-container">
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="message">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

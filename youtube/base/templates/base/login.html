@@ -1,0 +1,46 @@
+{% extends 'base/main.html' %}
+{% load static %}
+{% block title %}
+    Login
+{% endblock %}
+
+{% block content %}
+
+<div style="display: flex; justify-content: center; padding-bottom: 50px; padding-right: 72px;">
+    <div class="login-view-container">
+        <div class="youtube-logo-container">
+            <img class="youtube-logo" src="{% static 'icons/youtube-logo.svg'%}">
+            <p class="login-text">Please Login</p>
+        </div>
+        <div class="login-form-container">
+            <form method="POST" action="">
+                {% csrf_token %}
+                <input class="login-input" type="text" name="name" placeholder="Channel name">
+                <input class="login-input" type="password" name="password" placeholder="Password">
+                <div class="button-container">
+                    <button class="back-button" type="submit">
+                        Back
+                    </button>
+                    <button class="red-login-button" type="submit">
+                        Login
+                    </button>
+                </div>
+            </form>
+            <p class="register-link">
+                Do not have account? <a href="{% url 'register' %}">register here</a>
+            </p>
+            <div class="message-container">
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="message">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

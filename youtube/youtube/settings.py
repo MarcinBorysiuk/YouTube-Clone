@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'base',
 ]
 
+AUTH_USER_MODEL = 'base.Channel'
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',

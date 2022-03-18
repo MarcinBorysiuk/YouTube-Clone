@@ -1,0 +1,18 @@
+{% extends 'base/main.html' %}
+{% load static %}
+
+{% block title %}
+{% endblock %}
+
+{% block content %}
+{% include 'base/header.html' %}
+{% include 'base/sidebar.html' %}
+<div>
+    <form method="POST" action="" enctype="multipart/form-data" >
+        {% csrf_token %}
+        <input type="text" placeholder="Video title" name="title">
+        <input type="file" name="thumbnail">
+        <input type="submit">
+    </form>
+</div>
+{% endblock %}

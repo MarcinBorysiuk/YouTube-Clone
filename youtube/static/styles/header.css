@@ -170,4 +170,23 @@
 .current-user-picture {
     height: 32px;
     border-radius: 50%;
-}   
+}  
+
+.search-form {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+  }
+
+.login-button {
+    font-family: Roboto, Arial;
+    font-size: 16px;
+    color: #065fd4;
+    background-color: white;
+    border: solid 1px #065fd4;
+    border-radius: 2px;
+    padding: 8px 14px 8px 14px;
+    text-decoration: none;
+}

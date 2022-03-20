@@ -1,0 +1,69 @@
+.user-comments-container {
+    padding-top: 30px;
+}
+
+.user-comment-grid {
+    display: grid;
+    grid-template-columns: 60px 1fr;
+    margin-bottom: 28px;
+}
+
+.comment-channel-picture {
+    height: 40px;
+}
+
+.comment-channel-name {
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.comment-date {
+    font-size: 12px;
+    color: grey;
+    font-weight: 400;
+    margin-left: 6px;
+}
+
+.comment-body {
+    margin-top: 4px;
+    font-size: 14px;
+}
+
+.comment-reactions-flex {
+    margin-top: 14px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    column-gap: 20px;
+}
+
+.comment-reactions-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    column-gap: 8px;
+}
+
+.comment-icon {
+    height: 18px;
+}
+
+.comment-icon-text {
+    font-size: 14px;
+    color: grey
+}
+
+.reply-button {
+    font-size: 13px;
+    font-weight: 700;
+    color: grey;
+    background-color: rgb(248, 248, 248);
+    border: none;
+}
+
+.show-replies {
+    margin-top: 12px;
+    color:rgb(6, 95, 212);
+    font-size: 15px;
+    font-weight: 500;
+}

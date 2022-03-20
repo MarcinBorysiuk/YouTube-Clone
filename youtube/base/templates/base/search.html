@@ -20,12 +20,16 @@
 			{% for video in videos %}
 			<div class="search-view-video-grid">
 				<div>
-					<img class="search-view-thumbnail" src="{{ video.thumbnail.url }}">
+					<a href="{% url 'watch-video' video.id %}">
+						<img class="search-view-thumbnail" src="{{ video.thumbnail.url }}">
+					</a>
 				</div>
 				<div class="search-view-video-info">
-					<p class="search-view-video-title">
-						{{ video.title }}
-					</p>
+					<a href="{% url 'watch-video' video.id %}" class="search-view-video-link">
+						<p class="search-view-video-title">
+							{{ video.title }}
+						</p>
+					</a> 
 					<p class="search-view-video-details">
 						{{ video.views }} views &#183; {{ video.uploaded|timesince }} ago
 					</p>
@@ -35,13 +39,12 @@
 						</div>
 						<div>
 							<p class="search-view-channel-name">
-								{{ video.channel.name }}
+								{{ video.channel.username }}
 							</p>
 						</div>
 					</div>
 					<p class="search-view-video-description"> 
-						Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-						Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
+						{{ video.description }}
 					</p>
 				</div>
 			</div>

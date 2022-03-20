@@ -12,14 +12,26 @@
         {% for video in videos %}
         <div class="video-preview">
             <div class="thumbnail-row">
+                {% if video.video %}
+                <a href="{% url 'watch-video' video.id %}">
+                    <img class="thumbnail" src="{{ video.thumbnail.url }}">
+                    <div class="video-time">
+                        14:20
+                    </div>
+                </a>
+                {% else %}
                 <img class="thumbnail" src="{{ video.thumbnail.url }}">
                 <div class="video-time">
                     14:20
                 </div>
+                {% endif %}
+                
             </div>
             <div class="video-info-grid">
                 <div class="channel-picture">
-                    <img class="profile-picture" src="{{ video.channel.get_picture_url }}">
+                    <a href="{% url 'channel-details' video.channel.id %}">
+                        <img class="profile-picture" src="{{ video.channel.get_picture_url }}">
+                    </a>
                 </div>
                 <div class="video-info">
                     <p class="video-title">

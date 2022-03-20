@@ -1,10 +1,11 @@
 from django.shortcuts import render, redirect
-from .models import Video, Channel
+from .models import Video, Channel, Comment
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from .forms import CreateUserForm
+from .forms import CreateUserForm, UploadVideoForm
 from django.db.models import Q
+
 
 
 def register(request):
@@ -51,6 +52,7 @@ def logout_page(request):
 
 def home(request):
     videos = Video.objects.all()
+    print(videos[0].video.url)
     context = {'videos': videos}
     return render(request, 'base/home.html', context)
 
@@ -74,14 +76,35 @@ def upload_video(request):
     if request.method == "POST":
         title = request.POST.get('title')
         thumbnail = request.FILES.get('thumbnail')
+        video = request.FILES.get('video')
 
         new_video = Video(
+            video=video,
             title=title,
             thumbnail=thumbnail,
             views=0,
             channel=request.user
         )
         new_video.save()
-        
+
     return render(request, 'base/upload-video.html')
     
+def watch_video(request, id):
+    channel = request.user
+    video = Video.objects.get(id=id)
+    comments = video.comments.all()
+
+    side_videos = [v for v in Video.objects.all()[:40] if v != video]
+
+    if request.method == "POST":
+        body = request.POST.get('comment_body')
+        new_comment = Comment(
+            channel=channel,
+            video=video,
+            body=body
+        )
+        new_comment.save()
+        return redirect('watch-video', id)
+
+    context = {'video': video, 'comments': comments, 'side_videos': side_videos}
+    return render(request, 'base/watch-video.html', context)

@@ -1,0 +1,156 @@
+{% extends 'base/main.html' %}
+{% load static %}
+
+{% block title %}
+{% endblock %}
+
+{% block content %}
+{% include 'base/header.html' %}
+
+<div class="watch-video-container">
+    <div class="video-container">
+        <video class="video" src="{{ video.video.url }}" type="video.mp4" controls></video>
+        <p class="watch-video-title">{{ video.title }}</p>
+        <div class="watch-video-info-container">
+            <div class="watch-video-info-item">
+                <p class="watch-video-views">{{ video.views }} views &#183; {{ video.uploaded }}</p>
+            </div>
+            <div class="middle-section-empty">
+
+            </div>
+            <div class="watch-video-info-item">
+                <img class="video-icon" src="{% static 'icons/thumb-up.svg' %}">
+                <span class="like-icon-text">60K</span>
+            </div>
+            <div class="watch-video-info-item">
+                <img class="video-icon" src="{% static 'icons/thumb-down.svg' %}">
+                <span class="like-icon-text">DISLIKE</span>
+            </div>
+            <div class="watch-video-info-item">
+                <img class="video-icon" src="{% static 'icons/share.svg' %}">
+                <span class="like-icon-text">SHARE</span>
+            </div>
+            <div class="watch-video-info-item">
+                <img class="video-icon" src="{% static 'icons/clip.svg' %}">
+                <span class="like-icon-text">CLIP</span>
+            </div>
+            <div class="watch-video-info-item">
+                <img class="video-icon" src="{% static 'icons/save.svg' %}">
+                <span class="like-icon-text">SAVE</span>
+            </div>
+        </div>
+
+        <div class="watch-video-channel-info">
+            <div>
+                <img class="watch-video-channel-image" src="{{ video.channel.picture.url }}">
+            </div>
+            <div>
+                <p class="watch-video-channel-name">{{ video.channel.username }}</p>
+                <p class="watch-video-subscribers">800K Subscribers</p>
+            </div>
+            <div class="middle-section-empty">
+
+            </div>
+            <div>
+                <button class="subscribe-button">SUBSCRIBE</button>
+            </div>
+        </div>
+
+        <div class="watch-video-description-container">
+            {{ video.description }}
+        </div>
+
+        <div class="comment-filter-container">
+            <div class="comment-filter-item">
+                <p class="comment-text">4765 Comments</p>
+            </div>
+            <div class="comment-filter-item">
+                <img class="sort-icon" src="{% static 'icons/sort.svg' %}">
+                <span class="sort-icon-text">SORT BY</span>
+            </div>
+        </div>
+
+        <div class="comment-form-container">
+            <div class="comment-channel-picture-container">
+                <img class="comment-channel-picture" src="{{ request.user.picture.url }}">
+            </div>
+            <div class="form-container">
+                <form method="POST" action="">
+                    {% csrf_token %}
+                    <div>
+                        <input name="comment_body" class="comment-form-input" type="text" placeholder="Add Comment" required>
+                    </div>
+                    <div class="comment-form-buttons">
+                        <div>
+                            <img class="emoji-icon" src="{% static 'icons/emoji.svg' %}">
+                        </div>
+                        <div class="middle-section-empty">
+
+                        </div>
+                        <div>
+                            <button class="comment-button">CANCEL</button>
+                            <button type="submit" class="comment-button">COMMENT</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div> 
+        <div class="user-comments-container">
+            {% for comment in comments %}
+            <div class="user-comment-grid">
+                <div>
+                    <img class="comment-channel-picture" src="{{ comment.channel.picture.url }}">
+                </div>
+                <div>
+                    <p class="comment-channel-name">{{ comment.channel.username }}
+                        <span class="comment-date">
+                            {{ comment.created|timesince }} ago
+                        </span>
+                    </p>
+                    <p class="comment-body">{{ comment.body }}</p>
+                    <div class="comment-reactions-flex">
+                        <div class="comment-reactions-item">
+                            <img class="comment-icon" src="{% static 'icons/thumb-up.svg' %}">
+                            <span class="comment-icon-text">{{ comment.total_likes }}</span>
+                        </div>
+                        <div class="comment-reactions-item">
+                            <img class="comment-icon" src="{% static 'icons/thumb-down.svg' %}">
+                        </div>
+                        <div>
+                            <button class="reply-button">REPLY</button>
+                        </div>
+                    </div>
+                    <p class="show-replies">Show 21 replies</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="side-videos-container">
+        <div class="side-videos-sort">
+            <button class="side-videos-button">All</button>
+            <button class="side-videos-button">Similar</button>
+            <button class="side-videos-button">Watched</button>
+        </div>
+        {% for video in side_videos %}
+        <div class="side-video">
+            <div class="side-video-thumbnail-container">
+                <a href="{% url 'watch-video' video.id %}">
+                    <img class="side-video-thumbnail" src="{{ video.thumbnail.url }}">
+                </a>
+            </div>
+            <div class="side-video-info-container">
+                <a class="side-video-link" href="{% url 'watch-video' video.id %}">
+                    <p class="side-video-title">{{ video.title }}</p>
+                </a>
+                <p class="side-video-channel">{{ video.channel.username }}</p>
+                <p class="side-video-views">{{ video.views }} views &bull; {{ video.uploaded|timesince }} ago</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+
+
+{% endblock %}

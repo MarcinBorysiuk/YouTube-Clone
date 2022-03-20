@@ -1,6 +1,6 @@
 from django.contrib.auth.forms import UserCreationForm
 from django import forms
-from .models import Channel
+from .models import Channel, Video
 
 
 class CreateUserForm(UserCreationForm):
@@ -20,5 +20,10 @@ class CreateUserForm(UserCreationForm):
     class Meta:
         model = Channel
         fields = ['username', 'password1', 'password2']
+
+class UploadVideoForm(forms.Form):
+    class Meta:
+        model = Video
+        fields = ['title', 'thumbnail']
 
         

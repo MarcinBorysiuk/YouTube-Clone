@@ -1,0 +1,86 @@
+.reply-container {
+    padding: 10px;
+}
+
+.user-reply-grid {
+    display: grid;
+    grid-template-columns: 30px 1fr;
+    margin-bottom: 10px;
+}
+
+.reply-channel-picture {
+    height: 24px;
+    border-radius: 50%;
+}
+
+.reply-channel-name {
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.reply-date {
+    font-size: 12px;
+    color: grey;
+    font-weight: 400;
+    margin-left: 6px;
+}
+
+.reply-body {
+    margin-top: 8px;
+}
+
+.reply-form-container {
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: 30px 1fr;
+    padding-right: 50px;
+
+}
+
+.reply-form-channel-picture {
+    width: 24px;
+    border-radius: 50%;
+}
+
+
+.reply-form-input {
+    width: 100%; 
+    padding: 4px;
+    background-color: rgb(248, 248, 248);
+    border:none; 
+    border-bottom: 1px rgb(202, 202, 202) solid;
+    font-size: 14px;
+}
+
+.reply-emoji-icon { 
+    margin-left: 6px;
+    height: 20px;
+    opacity: 0.7;
+}
+
+.reply-form-buttons {
+    margin-top: 2px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.reply-button {
+    padding: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    color: rgb(71, 71, 71);
+    background-color: rgb(248, 248, 248);
+    border-radius: 2px;
+    border: none;
+    cursor: pointer;
+}
+
+.reply-button:hover {
+    background-color: rgb(199, 196, 196);
+}
+
+.arrow-icon {
+    height: 20px;
+}
+

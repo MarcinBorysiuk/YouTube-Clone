@@ -1,9 +1,9 @@
 from django.shortcuts import render, redirect
-from .models import Video, Channel, Comment
+from .models import Video, Channel, Comment, Reply
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from .forms import CreateUserForm, UploadVideoForm
+from .forms import CreateUserForm
 from django.db.models import Q
 
 
@@ -68,43 +68,94 @@ def search(request):
     context = {'videos': videos}
     return render(request, 'base/search.html', context)
 
+
 def channel_details(request, id):
+
+    current_option = request.GET.get('q') if request.GET.get('q') != None else ''
     channel = Channel.objects.get(id=id)
-    return render(request, 'base/channel-details.html', {'channel': channel})
+    subscriptions = [item for item in channel.subscriptions.all()]
+    videos = [item for item in channel.videos.all()]
+    channel_subscribed = channel.is_subscribing(request.user)
+    
+    context = {
+        'channel': channel, 
+        'subscriptions': subscriptions, 
+        'videos': videos,
+        'current_option': current_option,
+        'subscribed': channel_subscribed
+    }
+    return render(request, 'base/channel-details.html', context)
 
+
+@login_required(login_url='login')
 def upload_video(request):
-    if request.method == "POST":
-        title = request.POST.get('title')
-        thumbnail = request.FILES.get('thumbnail')
-        video = request.FILES.get('video')
 
-        new_video = Video(
+    if request.method == "POST":
+        video = request.FILES.get('video')
+        title = request.POST.get('title')
+        desc = request.POST.get('desc')
+        thumbnail = request.FILES.get('thumbnail')
+        channel = request.user
+
+        video_to_create = Video(
             video=video,
             title=title,
+            description=desc,
             thumbnail=thumbnail,
-            views=0,
-            channel=request.user
+            channel=channel
         )
-        new_video.save()
+
+        video_to_create.save()
+        return redirect('channel-details', request.user.id)
+    
 
     return render(request, 'base/upload-video.html')
     
 def watch_video(request, id):
     channel = request.user
     video = Video.objects.get(id=id)
+    video.add_one_view()
     comments = video.comments.all()
-
     side_videos = [v for v in Video.objects.all()[:40] if v != video]
+    channel_subscribed = video.channel.is_subscribing(channel)
+
 
     if request.method == "POST":
-        body = request.POST.get('comment_body')
-        new_comment = Comment(
-            channel=channel,
-            video=video,
-            body=body
-        )
-        new_comment.save()
-        return redirect('watch-video', id)
+        if 'comment_body' in request.POST:
+            body = request.POST.get('comment_body')
+            new_comment = Comment(
+                channel=channel,
+                video=video,
+                body=body
+            )
+            new_comment.save()
+            return redirect('watch-video', id)
 
-    context = {'video': video, 'comments': comments, 'side_videos': side_videos}
+        elif 'reply_body' in request.POST:
+            body = request.POST.get('reply_body')
+            comment_id = request.POST.get('comment_id')
+            comment = Comment.objects.get(id=comment_id)
+            new_reply = Reply(
+                channel=channel,
+                comment=comment,
+                body=body
+            )
+            new_reply.save()
+            return redirect('watch-video', id)
+
+    context = {'video': video, 'comments': comments, 'side_videos': side_videos, 'subscribed': channel_subscribed}
     return render(request, 'base/watch-video.html', context)
+
+def subscribe_channel(request, id):
+    current_channel = request.user
+    channel_to_subscribe = Channel.objects.get(id=id)
+
+    if channel_to_subscribe in current_channel.subscriptions.all():
+        current_channel.subscriptions.remove(channel_to_subscribe)
+        channel_to_subscribe.subscribers.remove(current_channel)
+    else:
+        current_channel.subscriptions.add(channel_to_subscribe)
+        channel_to_subscribe.subscribers.add(current_channel)
+
+    return redirect(request.META.get('HTTP_REFERER'))
+

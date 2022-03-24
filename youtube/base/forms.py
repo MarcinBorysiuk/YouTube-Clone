@@ -21,9 +21,38 @@ class CreateUserForm(UserCreationForm):
         model = Channel
         fields = ['username', 'password1', 'password2']
 
-class UploadVideoForm(forms.Form):
+class UploadVideoForm(forms.ModelForm):
+    title = forms.CharField(
+        widget=forms.TextInput(
+            attrs={'class': 'upload-view-form', 'placeholder': 'Title for your video'}
+        ),
+        label=''
+        )
+    
+    description = forms.CharField(
+        widget=forms.Textarea(
+            attrs={'class': 'upload-view-form', 'placeholder': 'Description (optional)'}
+        ),
+        label=''
+        )
+
+    video = forms.CharField(
+        widget=forms.FileInput(
+            attrs={'class': 'upload-view-form'}),
+        label=forms.FileInput(
+            attrs={'class': 'custom-file-upload'}
+        )   
+        )
+    
+    thumbnail = forms.CharField(widget=forms.FileInput(
+            attrs={'class': 'upload-view-form'}
+        ))
+
     class Meta:
         model = Video
-        fields = ['title', 'thumbnail']
+        fields = ['video', 'title', 'description', 'thumbnail',  'channel']
+        widgets = {
+            'channel': forms.HiddenInput(),
+            }
 
         

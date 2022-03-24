@@ -35,7 +35,7 @@
 					</p>
 					<div class="search-view-channel-grid">
 						<div>
-							<img class="search-view-profile-picture" src="{{ video.channel.picture.url }}">
+							<img class="search-view-profile-picture" src="{{ video.channel.get_picture_url }}">
 						</div>
 						<div>
 							<p class="search-view-channel-name">
@@ -44,7 +44,9 @@
 						</div>
 					</div>
 					<p class="search-view-video-description"> 
+						{% if video.description %}
 						{{ video.description }}
+						{% endif %}
 					</p>
 				</div>
 			</div>

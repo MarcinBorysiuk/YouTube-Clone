@@ -7,13 +7,25 @@
 {% block content %}
 {% include 'base/header.html' %}
 {% include 'base/sidebar.html' %}
-<div>
-    <form method="POST" action="" enctype="multipart/form-data" >
-        {% csrf_token %}
-        <input type="file" placeholder="Video" name="video">
-        <input type="text" placeholder="Video title" name="title">
-        <input type="file" name="thumbnail">
-        <input type="submit">
-    </form>
+<div class="upload-view-container">
+  <div class="upload-view-picture">
+    <img src="https://www.gstatic.com/youtube/img/creator/no_content_illustration_upload_video_v3.svg">
+  </div>
+    
+  <form class="upload-form" method="POST" action="" enctype="multipart/form-data" >
+      {% csrf_token %}
+      <label class="video-upload">
+          <input name="video" type="file">
+          Upload Video
+      </label>
+      <label class="thumbnail-upload">
+          <input name="thumbnail" type="file">
+          Upload Thumbnail
+      </label>
+
+      <input class="title-input" name="title" type="text" placeholder="Title">
+      <textarea class="textarea" name="desc" type="text" placeholder="Description"></textarea>
+      <input class="upload-submit-button" type="submit" value="Submit">
+  </form>
 </div>
 {% endblock %}

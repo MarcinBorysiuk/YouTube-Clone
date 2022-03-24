@@ -20,7 +20,7 @@
             </div>
             <div class="watch-video-info-item">
                 <img class="video-icon" src="{% static 'icons/thumb-up.svg' %}">
-                <span class="like-icon-text">60K</span>
+                <span class="like-icon-text">{{ video.likes }}</span>
             </div>
             <div class="watch-video-info-item">
                 <img class="video-icon" src="{% static 'icons/thumb-down.svg' %}">
@@ -42,27 +42,39 @@
 
         <div class="watch-video-channel-info">
             <div>
-                <img class="watch-video-channel-image" src="{{ video.channel.picture.url }}">
+                <a href="{% url 'channel-details' video.channel.id %}">
+                    <img class="watch-video-channel-image" src="{{ video.channel.get_picture_url }}">
+                </a>
             </div>
             <div>
                 <p class="watch-video-channel-name">{{ video.channel.username }}</p>
-                <p class="watch-video-subscribers">800K Subscribers</p>
+                <p class="watch-video-subscribers">{{ video.channel.get_subscribers_count }} Subscribers</p>
             </div>
             <div class="middle-section-empty">
 
             </div>
             <div>
-                <button class="subscribe-button">SUBSCRIBE</button>
+                {% if subscribed %}
+                    <a class="watch-video-channel-subscribed" href="{% url 'subscribe-channel' video.channel.id %}">
+                        SUBSCRIBED
+                    </a>
+                {% else %}
+                <a class="subscribe-button" href="{% url 'subscribe-channel' video.channel.id %}">
+                    SUBSCRIBE
+                </a>
+                {% endif %}
             </div>
         </div>
 
         <div class="watch-video-description-container">
+            {% if video.description %}
             {{ video.description }}
+            {% endif %}
         </div>
 
         <div class="comment-filter-container">
             <div class="comment-filter-item">
-                <p class="comment-text">4765 Comments</p>
+                <p class="comment-text">{{ video.get_comments_count }} Comments</p>
             </div>
             <div class="comment-filter-item">
                 <img class="sort-icon" src="{% static 'icons/sort.svg' %}">
@@ -72,7 +84,7 @@
 
         <div class="comment-form-container">
             <div class="comment-channel-picture-container">
-                <img class="comment-channel-picture" src="{{ request.user.picture.url }}">
+                <img class="comment-channel-picture" src="{{ request.user.get_picture_url }}">
             </div>
             <div class="form-container">
                 <form method="POST" action="">
@@ -99,7 +111,7 @@
             {% for comment in comments %}
             <div class="user-comment-grid">
                 <div>
-                    <img class="comment-channel-picture" src="{{ comment.channel.picture.url }}">
+                    <img class="comment-channel-picture" src="{{ comment.channel.get_picture_url }}">
                 </div>
                 <div>
                     <p class="comment-channel-name">{{ comment.channel.username }}
@@ -116,11 +128,76 @@
                         <div class="comment-reactions-item">
                             <img class="comment-icon" src="{% static 'icons/thumb-down.svg' %}">
                         </div>
-                        <div>
-                            <button class="reply-button">REPLY</button>
+                        
+                        <div onclick="writeReply('reply-form-{{ comment.id }}')">
+                            <button class="reply-button">
+                              REPLY
+                            </button>
                         </div>
                     </div>
-                    <p class="show-replies">Show 21 replies</p>
+                    <div id="reply-form-{{ comment.id }}" style="display: none">
+                        <div class="reply-form-container">
+                            <div>
+                                <img class="reply-form-channel-picture" src="{{ request.user.get_picture_url }}">
+                            </div>
+                            <div class="form-container">
+                                <form method="POST" action="">
+                                    {% csrf_token %}
+                                    <div>
+                                        <input name="reply_body" class="reply-form-input" type="text" placeholder="Add reply..." required>
+                                        <input type="hidden" name="comment_id" value="{{ comment.id }}">
+                                    </div>
+                                    <div class="reply-form-buttons">
+                                        <div>
+                                            <img class="reply-emoji-icon" src="{% static 'icons/emoji.svg' %}">
+                                        </div>
+                                        <div class="middle-section-empty">
+                
+                                        </div>
+                                        <div>
+                                            <button class="reply-button" onclick="writeReply('reply-form-{{ comment.id }}')">CANCEL</button>
+                                            <button type="submit" class="reply-button">REPLY</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div> 
+                    </div>
+        
+                    {% if comment.get_replies_count > 0 %}
+                    <button class="show-replies" onclick="showReplies('replies-{{ comment.id }}')">
+                        <img class="arrow-icon" src="{% static 'icons/arrow-down.png' %}"> 
+                        Show {{ comment.get_replies_count }} replies
+                    </button>
+                    {% endif %}
+                    <div id="replies-{{ comment.id }}" style="display: none;">
+                        {% for reply in comment.replies.all %}
+                        <div class="reply-container">
+                            <div class="user-reply-grid">
+                                <div>
+                                    <img class="reply-channel-picture" src="{{ reply.channel.get_picture_url }}">
+                                </div>
+                                <div>
+                                    <p class="reply-channel-name">
+                                        {{ reply.channel.username }} <span class="reply-date"> {{ reply.created|timesince }} ago</span>
+                                    </p>
+                                    <p class="reply-body">
+                                        {{ reply.body }}
+                                    </p>
+                                    <div class="comment-reactions-flex">
+                                        <div class="comment-reactions-item">
+                                            <img class="comment-icon" src="{% static 'icons/thumb-up.svg' %}">
+                                            <span class="comment-icon-text">{{ reply.total_likes }}</span>
+                                        </div>
+                                        <div class="comment-reactions-item">
+                                            <img class="comment-icon" src="{% static 'icons/thumb-down.svg' %}">
+                                        </div>
+                                    </div>
+                                </div>    
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
                 </div>
             </div>
             {% endfor %}
@@ -150,7 +227,4 @@
         {% endfor %}
     </div>
 </div>
-
-
-
 {% endblock %}

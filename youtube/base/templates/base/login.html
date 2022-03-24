@@ -26,9 +26,17 @@
                     </button>
                 </div>
             </form>
-            <p class="register-link">
-                Do not have account? <a href="{% url 'register' %}">register here</a>
-            </p>
+            <div class="register">
+                <p>
+                    Do not have account? 
+                </p>
+                <p>
+                    <a class="register-link" href="{% url 'register' %}">
+                        register here
+                    </a>
+                </p>
+            </div>
+            
             <div class="message-container">
                 {% if messages %}
                     {% for message in messages %}

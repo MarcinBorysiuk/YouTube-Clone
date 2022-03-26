@@ -1,11 +1,19 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 
+def video_directory_path(instance, filename):
+    return "videos/channel_{0}/{1}".format(instance.channel.id, filename)
+
+def thumbnail_directory_path(instance, filename):
+    return "thumbnails/channel_{0}/{1}".format(instance.channel.id, filename)
+
+def profile_directory_path(instance, filename):
+    return "images/channel_{0}/{1}".format(instance.id, filename)
 
 class Channel(AbstractUser):
     username = models.CharField(max_length=100, unique=True, null=True)
     email = models.EmailField(unique=True)
-    picture = models.ImageField(upload_to='channel-pictures',null=True)
+    picture = models.ImageField(upload_to=profile_directory_path,null=True)
     subscriptions = models.ManyToManyField('Channel', blank=True, related_name='channel_subscribers')
     subscribers = models.ManyToManyField('Channel', blank=True, related_name='channel_subscriptions')
     USERNAME_FIELD = 'email'
@@ -33,9 +41,9 @@ class Channel(AbstractUser):
 
         
 class Video(models.Model):
-    video = models.FileField(upload_to='videos', null=True)
+    video = models.FileField(upload_to=video_directory_path, null=True)
     title = models.CharField(max_length=60)
-    thumbnail = models.ImageField(upload_to='thumbnails', null=True)
+    thumbnail = models.ImageField(upload_to=thumbnail_directory_path, null=True)
     description = models.TextField(null=True)
     likes = models.ManyToManyField(Channel, related_name='video_liked')
     dislikes = models.ManyToManyField(Channel, related_name='video_disliked')

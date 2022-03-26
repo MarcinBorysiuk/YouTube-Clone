@@ -149,7 +149,7 @@ def watch_video(request, id):
     context = {'video': video, 'comments': comments, 'side_videos': side_videos, 'subscribed': channel_subscribed}
     return render(request, 'base/watch-video.html', context)
 
-@login_required
+@login_required(login_url='login')
 def like_video(request, id):
     channel = request.user
     like = False
@@ -174,6 +174,7 @@ def like_video(request, id):
         return JsonResponse(data, safe=False)
     return redirect(reverse("watch-video", args=[str(id)]))
 
+@login_required(login_url='login')
 def dislike_video(request, id):
     channel = request.user
     dislike = False

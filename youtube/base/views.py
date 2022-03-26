@@ -1,4 +1,6 @@
-from django.shortcuts import render, redirect
+from django.http import JsonResponse
+from django.urls import reverse
+from django.shortcuts import get_object_or_404, render, redirect
 from .models import Video, Channel, Comment, Reply
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
@@ -26,21 +28,21 @@ def register(request):
 def login_page(request):
 
     if request.method == 'POST':
-        name = request.POST.get('name')
+        email = request.POST.get('email')
         password = request.POST.get('password')
 
         try:
-            user = Channel.objects.get(username=name)
+            user = Channel.objects.get(email=email)
         except:
             messages.warning(request, 'User does not exist')
 
-        user = authenticate(request, username=name, password=password)
+        user = authenticate(request, email=email, password=password)
 
         if user is not None:
             login(request, user)
             return redirect('home')
         else:
-            messages.warning(request, 'Username or Password is incorrect')
+            messages.warning(request, 'E-mail or Password is incorrect')
 
     return render(request, 'base/login.html', {})
 
@@ -52,7 +54,6 @@ def logout_page(request):
 
 def home(request):
     videos = Video.objects.all()
-    print(videos[0].video.url)
     context = {'videos': videos}
     return render(request, 'base/home.html', context)
 
@@ -119,7 +120,9 @@ def watch_video(request, id):
     side_videos = [v for v in Video.objects.all()[:40] if v != video]
     channel_subscribed = video.channel.is_subscribing(channel)
 
-
+    
+    print(video.likes.all())
+    print(video.dislikes.all())
     if request.method == "POST":
         if 'comment_body' in request.POST:
             body = request.POST.get('comment_body')
@@ -145,6 +148,56 @@ def watch_video(request, id):
 
     context = {'video': video, 'comments': comments, 'side_videos': side_videos, 'subscribed': channel_subscribed}
     return render(request, 'base/watch-video.html', context)
+
+@login_required
+def like_video(request, id):
+    channel = request.user
+    like = False
+    if request.method == "POST":
+        video_id = request.POST.get('video_id')
+        video_to_like = get_object_or_404(Video, id=video_id)
+        if channel in video_to_like.likes.all():
+            video_to_like.likes.remove(channel)
+            like = False
+        else:
+            if channel in video_to_like.dislikes.all():
+                video_to_like.dislikes.remove(channel)
+            video_to_like.likes.add(channel)
+            like = True
+
+        data = {
+            'like': like,
+            'total_likes': video_to_like.total_likes(),
+            'total_dislikes': video_to_like.total_dislikes()
+        }
+
+        return JsonResponse(data, safe=False)
+    return redirect(reverse("watch-video", args=[str(id)]))
+
+def dislike_video(request, id):
+    channel = request.user
+    dislike = False
+    if request.method == "POST":
+        video_id = request.POST.get('video_id')
+        video_to_dislike = get_object_or_404(Video, id=video_id)
+        if channel in video_to_dislike.dislikes.all():
+            video_to_dislike.dislikes.remove(channel)
+            dislike = False
+        else:
+            if channel in video_to_dislike.likes.all():
+                video_to_dislike.likes.remove(channel)
+            video_to_dislike.dislikes.add(channel)
+            dislike = True
+
+        data = {
+            'dislike': dislike,
+            'total_dislikes': video_to_dislike.total_dislikes(),
+            'total_likes': video_to_dislike.total_likes()
+        }
+
+        return JsonResponse(data, safe=False)
+    return redirect(reverse("watch-video", args=[str(id)]))
+
 
 def subscribe_channel(request, id):
     current_channel = request.user

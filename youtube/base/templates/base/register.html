@@ -5,15 +5,22 @@
     <div class="login-view-container">
         <div class="youtube-logo-container">
             <img class="youtube-logo" src="{% static 'icons/youtube-logo.svg'%}">
-            <p class="login-text">Register</p>
         </div>
         <div class="login-form-container">
             <form method='POST'>
                 {% csrf_token %}
+                {{ form.email }}
                 {{ form.username }}
                 {{ form.password1 }}
                 {{ form.password2 }}
-                <button class="red-login-button" type="submit">Register</button>
+                <div class="button-container">
+                    <button class="back-button" type="submit">
+                        Back
+                    </button>
+                    <button class="red-login-button" type="submit">
+                        Register
+                    </button>
+                </div>
             </form>
             <div class="message-container">
                 {% if messages %}

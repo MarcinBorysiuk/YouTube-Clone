@@ -15,15 +15,15 @@
   <form class="upload-form" method="POST" action="" enctype="multipart/form-data" >
       {% csrf_token %}
       <label class="video-upload">
-          <input name="video" type="file">
+          <input name="video" type="file" required>
           Upload Video
       </label>
       <label class="thumbnail-upload">
-          <input name="thumbnail" type="file">
+          <input name="thumbnail" type="file" required>
           Upload Thumbnail
       </label>
 
-      <input class="title-input" name="title" type="text" placeholder="Title">
+      <input class="title-input" name="title" type="text" placeholder="Title" required>
       <textarea class="textarea" name="desc" type="text" placeholder="Description"></textarea>
       <input class="upload-submit-button" type="submit" value="Submit">
   </form>

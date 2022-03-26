@@ -11,7 +11,7 @@
     padding-top: 30px;
 }
 
-.youtube-logo {
+.login-youtube-logo {
     height: 32px;
 }
 
@@ -94,4 +94,9 @@
 .register-link {
     color:#065fd4;
     text-decoration: none;
+}
+
+.register-button-container {
+    margin-top: 20px;
+    margin-left: 250px;
 }

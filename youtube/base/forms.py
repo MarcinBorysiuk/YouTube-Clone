@@ -4,22 +4,23 @@ from .models import Channel, Video
 
 
 class CreateUserForm(UserCreationForm):
+    username = forms.CharField(
+        widget=forms.TextInput(attrs={'class':'login-input','placeholder':'Channel Name'}),
+        )
+    email = forms.EmailField(
+        widget=forms.EmailInput(attrs={'class':'login-input','placeholder':'E-mail Address'}),
+    )
     password1 = forms.CharField(
-        label="Password",
         widget=forms.PasswordInput(attrs={'class':'login-input','placeholder':'Password'}),
         )
     password2 = forms.CharField(
-        label="Confirm password",
         widget=forms.PasswordInput(attrs={'class':'login-input','placeholder':'Confirm Password'}),
         )
-    username = forms.CharField(
-        label="Channel Name",
-        widget=forms.TextInput(attrs={'class':'login-input','placeholder':'Channel Name'}),
-        )
+    
 
     class Meta:
         model = Channel
-        fields = ['username', 'password1', 'password2']
+        fields = ['email', 'username', 'password1', 'password2']
 
 class UploadVideoForm(forms.ModelForm):
     title = forms.CharField(

@@ -17,3 +17,18 @@ form,
 textarea {
     outline: none;
 }
+
+button:focus {
+    outline: none !important;
+    border: none !important;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+}
+
+.material-icons-outlined {
+    color: rgb(71, 71, 71);
+}
+
+.material-icons {
+    color: rgb(9, 91, 197)
+}

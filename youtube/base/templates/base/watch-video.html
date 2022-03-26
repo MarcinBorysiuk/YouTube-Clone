@@ -19,23 +19,59 @@
 
             </div>
             <div class="watch-video-info-item">
-                <img class="video-icon" src="{% static 'icons/thumb-up.svg' %}">
-                <span class="like-icon-text">{{ video.likes }}</span>
+                <form method="POST" action="{% url 'like-video' video.id %}" class="watch-video-like-form">
+                    {% csrf_token %}
+                    
+                    <button class="like-button" type="submit" value="{{ video.id }}">
+                        {% if request.user not in video.likes.all %}
+                            <span class="material-icons-outlined like-icon">
+                                thumb_up
+                            </span>
+                        {% else %}
+                            <span class="material-icons like-icon">
+                                thumb_up
+                            </span>
+                        {% endif %}
+                    </button>
+                    <span id="total-likes" class="like-icon-text">{{ video.total_likes }}</span>
+                </form>
             </div>
+
             <div class="watch-video-info-item">
-                <img class="video-icon" src="{% static 'icons/thumb-down.svg' %}">
-                <span class="like-icon-text">DISLIKE</span>
+                <form method="POST" action="{% url 'dislike-video' video.id %}" class="watch-video-dislike-form">
+                    {% csrf_token %}
+                    
+                    <button class="dislike-button" type="submit" value="{{ video.id }}">
+                        {% if request.user not in video.dislikes.all %}
+                            <span class="material-icons-outlined dislike-icon">
+                                thumb_down
+                            </span>
+                        {% else %}
+                            <span class="material-icons dislike-icon">
+                                thumb_down
+                            </span>
+                        {% endif %}
+                    </button>
+                    <span id="total-dislikes" class="like-icon-text">{{ video.total_dislikes }}</span>
+                </form>
             </div>
+       
             <div class="watch-video-info-item">
-                <img class="video-icon" src="{% static 'icons/share.svg' %}">
+                <span class="material-icons-outlined video-icon">
+                    share
+                </span>
                 <span class="like-icon-text">SHARE</span>
             </div>
             <div class="watch-video-info-item">
-                <img class="video-icon" src="{% static 'icons/clip.svg' %}">
+                <span class="material-icons-outlined video-icon">
+                    content_cut
+                </span>
                 <span class="like-icon-text">CLIP</span>
             </div>
             <div class="watch-video-info-item">
-                <img class="video-icon" src="{% static 'icons/save.svg' %}">
+                <span class="material-icons-outlined video-icon">
+                    playlist_add
+                </span>
                 <span class="like-icon-text">SAVE</span>
             </div>
         </div>
@@ -53,6 +89,7 @@
             <div class="middle-section-empty">
 
             </div>
+            {% if video.channel != request.user %}
             <div>
                 {% if subscribed %}
                     <a class="watch-video-channel-subscribed" href="{% url 'subscribe-channel' video.channel.id %}">
@@ -64,6 +101,7 @@
                 </a>
                 {% endif %}
             </div>
+            {% endif %}
         </div>
 
         <div class="watch-video-description-container">

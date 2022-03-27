@@ -7,8 +7,6 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .forms import CreateUserForm
 from django.db.models import Q
-from django.core.exceptions import ObjectDoesNotExist
-
 
 
 def register(request):
@@ -75,8 +73,8 @@ def channel_details(request, id):
 
     current_option = request.GET.get('q') if request.GET.get('q') != None else ''
     channel = Channel.objects.get(id=id)
-    subscriptions = 6*[item for item in channel.subscriptions.all()]
-    videos = 6*[item for item in channel.videos.all()]
+    subscriptions = [item for item in channel.subscriptions.all()]
+    videos = [item for item in channel.videos.all()]
     channel_subscribed = channel.is_subscribing(request.user)
     
     context = {
@@ -106,8 +104,9 @@ def upload_video(request):
             thumbnail=thumbnail,
             channel=channel
         )
-
         video_to_create.save()
+        video_to_create.get_duration()
+        
         return redirect('channel-details', request.user.id)
     
 

@@ -14,4 +14,5 @@ def get_video_length(video_url):
     if seconds < 10:
         seconds = f'0{seconds}'
 
-    return minutes, seconds
+    return str(minutes) + ':' + str(seconds)
+

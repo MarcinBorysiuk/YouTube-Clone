@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from PIL import Image
+from .helpers import get_video_length
 
 def video_directory_path(instance, filename):
     return "videos/channel_{0}/{1}".format(instance.channel.id, filename)
@@ -29,7 +30,7 @@ class Channel(AbstractUser):
         img_width = img.height
         img = img.resize((img_width, img.height))
         img.save(self.picture.path)
-        
+
 
     def __str__(self):
         return self.username
@@ -55,6 +56,7 @@ class Video(models.Model):
     title = models.CharField(max_length=60)
     thumbnail = models.ImageField(upload_to=thumbnail_directory_path, null=True)
     description = models.TextField(null=True)
+    length = models.CharField(max_length=20, null=True)
     likes = models.ManyToManyField(Channel, related_name='video_liked')
     dislikes = models.ManyToManyField(Channel, related_name='video_disliked')
     views = models.IntegerField(default=0)
@@ -76,12 +78,17 @@ class Video(models.Model):
             img.save(self.thumbnail.path)
 
 
-    def get_comments_count(self):
-        return self.comments.count()
+    def get_duration(self):
+        duration = get_video_length(self.video.path)
+        self.length = duration
+        self.save()
 
     def add_one_view(self):
         self.views += 1
         self.save()
+
+    def get_comments_count(self):
+        return self.comments.count()
 
     def total_likes(self):
         return self.likes.all().count()

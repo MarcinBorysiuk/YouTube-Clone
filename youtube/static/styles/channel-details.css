@@ -103,15 +103,9 @@
 .channels-container,
 .videos-container {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: repeat(6, 1fr);
     column-gap: 25px;
-    row-gap: 25px;
-}
-
-.video-link,
-.channel-link {
-    text-decoration: none;
-    color: black;
+    row-gap: 50px;
 }
 
 .video-thumbnail {
@@ -119,12 +113,17 @@
 }
 
 .single-channel-container {
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .subsrciption-channel-picture {
     height: 100px;
+    width: 100%;
     border-radius: 50%;
+    margin-bottom: 10px;
 }
 
 .subscription-channel-name {

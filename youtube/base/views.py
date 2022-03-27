@@ -7,6 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .forms import CreateUserForm
 from django.db.models import Q
+from django.core.exceptions import ObjectDoesNotExist
 
 
 
@@ -74,8 +75,8 @@ def channel_details(request, id):
 
     current_option = request.GET.get('q') if request.GET.get('q') != None else ''
     channel = Channel.objects.get(id=id)
-    subscriptions = [item for item in channel.subscriptions.all()]
-    videos = [item for item in channel.videos.all()]
+    subscriptions = 6*[item for item in channel.subscriptions.all()]
+    videos = 6*[item for item in channel.videos.all()]
     channel_subscribed = channel.is_subscribing(request.user)
     
     context = {
@@ -120,9 +121,6 @@ def watch_video(request, id):
     side_videos = [v for v in Video.objects.all()[:40] if v != video]
     channel_subscribed = video.channel.is_subscribing(channel)
 
-    
-    print(video.likes.all())
-    print(video.dislikes.all())
     if request.method == "POST":
         if 'comment_body' in request.POST:
             body = request.POST.get('comment_body')

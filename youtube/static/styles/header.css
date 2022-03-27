@@ -16,7 +16,8 @@
 }
 
 .left-section {
-    width: 150px;
+    width: 180px;
+    min-width: 180px;
     display: flex;
     align-items: center;
 }
@@ -28,7 +29,7 @@
 }
 
 .youtube-logo {
-    height: 26px;
+    height: 34px;
 }
 
 .middle-section {
@@ -42,7 +43,7 @@
 
 .search-bar {
     flex: 1;
-    height: 36px;
+    height: 40px;
     padding-left: 10px;
     font-size: 16px;
     border-width: 1px;

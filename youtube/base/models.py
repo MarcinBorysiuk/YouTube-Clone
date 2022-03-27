@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from PIL import Image
 
 def video_directory_path(instance, filename):
     return "videos/channel_{0}/{1}".format(instance.channel.id, filename)
@@ -10,15 +11,25 @@ def thumbnail_directory_path(instance, filename):
 def profile_directory_path(instance, filename):
     return "images/channel_{0}/{1}".format(instance.id, filename)
 
+
 class Channel(AbstractUser):
     username = models.CharField(max_length=100, unique=True, null=True)
     email = models.EmailField(unique=True)
-    picture = models.ImageField(upload_to=profile_directory_path,null=True)
+    picture = models.ImageField(upload_to=profile_directory_path, null=True)
     subscriptions = models.ManyToManyField('Channel', blank=True, related_name='channel_subscribers')
     subscribers = models.ManyToManyField('Channel', blank=True, related_name='channel_subscriptions')
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username']
 
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        img = Image.open(self.picture.path)
+
+        img_width = img.height
+        img = img.resize((img_width, img.height))
+        img.save(self.picture.path)
+        
 
     def __str__(self):
         return self.username
@@ -30,7 +41,7 @@ class Channel(AbstractUser):
         if self.picture:
             return self.picture.url
         else:
-            return '/static/images/channel-pictures/no-channel-picture.jpg'
+            return '/static/no-profile/no-profile.jpg'
 
     def get_subscribers_count(self):
         return self.subscribers.all().count()
@@ -38,8 +49,7 @@ class Channel(AbstractUser):
     def is_subscribing(self, channel):
         return channel in self.subscribers.all()
 
-
-        
+    
 class Video(models.Model):
     video = models.FileField(upload_to=video_directory_path, null=True)
     title = models.CharField(max_length=60)
@@ -50,6 +60,20 @@ class Video(models.Model):
     views = models.IntegerField(default=0)
     uploaded = models.DateTimeField(auto_now_add=True)
     channel = models.ForeignKey(Channel, on_delete=models.CASCADE, related_name='videos', null=True)
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        img = Image.open(self.thumbnail.path)
+
+        if img.width <= 300:
+            img_width = int(img.width*3)
+            img_height = int(img_width/1.8)
+            img = img.resize((img_width, img_height))
+            img.save(self.thumbnail.path)
+        else:
+            img_height = int(img.width/1.8)
+            img = img.resize((img.width, img_height))
+            img.save(self.thumbnail.path)
 
 
     def get_comments_count(self):

@@ -63,7 +63,7 @@
         <div class="channels-container">
             {% for channel in subscriptions %}
             <div class="single-channel-container">
-                <a class="channel-link" href="{% url 'channel-details' channel.id %}">
+                <a style="text-align: center;" href="{% url 'channel-details' channel.id %}">
                     <img class="subsrciption-channel-picture" src="{{ channel.get_picture_url }}">
                     <p class="subscription-channel-name">
                         {{ channel.username }}
@@ -114,7 +114,11 @@
                 <a class="video-link" href="{% url 'watch-video' video.id %}">
                     <img class="video-thumbnail" src="{{ video.thumbnail.url }}">
                     <p class="video-title">
+                        {% if video.title|length < 40 %}
                         {{ video.title }}
+                        {% else %}
+                        {{ video.title|slice:":40"}}...
+                        {% endif %}
                     </p>
                 </a>
                 <p class="video-stats">

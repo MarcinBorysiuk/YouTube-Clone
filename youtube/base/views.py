@@ -7,6 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .forms import CreateUserForm
 from django.db.models import Q
+from .helpers import validate_thumbnail_extension, validate_video_extension, validate_video_size, validate_video_title
 
 
 def register(request):
@@ -89,7 +90,7 @@ def channel_details(request, id):
 
 @login_required(login_url='login')
 def upload_video(request):
-
+    
     if request.method == "POST":
         video = request.FILES.get('video')
         title = request.POST.get('title')
@@ -97,19 +98,25 @@ def upload_video(request):
         thumbnail = request.FILES.get('thumbnail')
         channel = request.user
 
-        video_to_create = Video(
-            video=video,
-            title=title,
-            description=desc,
-            thumbnail=thumbnail,
-            channel=channel
-        )
-        video_to_create.save()
-        video_to_create.get_duration()
-        
-        return redirect('channel-details', request.user.id)
-    
+        if validate_video_title(request, title, Video):
+            print(title)
+            return redirect('upload-video')
 
+        if validate_video_extension(video, request) and validate_thumbnail_extension(thumbnail, request) and validate_video_size(video, request):
+            video_to_create = Video(
+                video=video,
+                title=title,
+                description=desc,
+                thumbnail=thumbnail,
+                channel=channel
+            )
+            video_to_create.save()
+            video_to_create.get_duration()
+            messages.success(request, 'Successfully uploaded ' + title )
+            return redirect('channel-details', request.user.id)
+        else:
+            return redirect('upload-video')
+        
     return render(request, 'base/upload-video.html')
     
 def watch_video(request, id):

@@ -39,10 +39,7 @@ class UploadVideoForm(forms.ModelForm):
 
     video = forms.CharField(
         widget=forms.FileInput(
-            attrs={'class': 'upload-view-form'}),
-        label=forms.FileInput(
-            attrs={'class': 'custom-file-upload'}
-        )   
+            attrs={'class': 'upload-view-form'}) 
         )
     
     thumbnail = forms.CharField(widget=forms.FileInput(
@@ -52,8 +49,6 @@ class UploadVideoForm(forms.ModelForm):
     class Meta:
         model = Video
         fields = ['video', 'title', 'description', 'thumbnail',  'channel']
-        widgets = {
-            'channel': forms.HiddenInput(),
-            }
+        
 
         

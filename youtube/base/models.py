@@ -3,6 +3,7 @@ from django.contrib.auth.models import AbstractUser
 from PIL import Image
 from .helpers import get_video_length
 
+
 def video_directory_path(instance, filename):
     return "videos/channel_{0}/{1}".format(instance.channel.id, filename)
 
@@ -53,7 +54,7 @@ class Channel(AbstractUser):
     
 class Video(models.Model):
     video = models.FileField(upload_to=video_directory_path, null=True)
-    title = models.CharField(max_length=60)
+    title = models.CharField(max_length=60, unique=True)
     thumbnail = models.ImageField(upload_to=thumbnail_directory_path, null=True)
     description = models.TextField(null=True)
     length = models.CharField(max_length=20, null=True)

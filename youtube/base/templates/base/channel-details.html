@@ -63,12 +63,12 @@
         <div class="channels-container">
             {% for channel in subscriptions %}
             <div class="single-channel-container">
-                <a style="text-align: center;" href="{% url 'channel-details' channel.id %}">
+                <a href="{% url 'channel-details' channel.id %}">
                     <img class="subsrciption-channel-picture" src="{{ channel.get_picture_url }}">
-                    <p class="subscription-channel-name">
-                        {{ channel.username }}
-                    </p>
                 </a>
+                <p class="subscription-channel-name">
+                    {{ channel.username }}
+                </p>
                 <p class="channel-subscribers">
                     {{ channel.get_subscribers_count }} subscribers
                 </p>

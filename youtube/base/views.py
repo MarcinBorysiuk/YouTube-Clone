@@ -218,7 +218,7 @@ def dislike_video(request, id):
         return JsonResponse(data, safe=False)
     return redirect(reverse("watch-video", args=[str(id)]))
 
-
+@login_required(login_url='login')
 def subscribe_channel(request, id):
     current_channel = request.user
     channel_to_subscribe = Channel.objects.get(id=id)
@@ -232,3 +232,13 @@ def subscribe_channel(request, id):
 
     return redirect(request.META.get('HTTP_REFERER'))
 
+
+def change_profile(request, id):
+    channel = Channel.objects.get(id=id)
+
+    if request.method == "POST":
+        profile_picture = request.FILES.get('profile_picture')
+        channel.picture = profile_picture
+        channel.save()
+        return redirect('channel-details', id)
+    return render(request, 'base/change-profile.html', {'channel': channel})

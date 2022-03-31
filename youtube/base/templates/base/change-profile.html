@@ -1,0 +1,38 @@
+{% extends 'base/main.html' %}
+{% load static %}
+
+{% block title %}
+{% endblock %}
+
+{% block content %}
+{% include 'base/header.html' %}
+{% include 'base/sidebar.html' %}
+
+<div>
+    <p class="upload-view-title">
+        Change profile picture
+    </p>
+    <p class="upload-view-text">
+        Your profile picture will appear wherever your YouTube channel is featured, such as alongside your videos and comments
+    </p>
+    <div class="upload-form-container">
+        <div class="upload-channel-picture-container">
+            <img class="upload-channel-picture" src="{{ channel.get_picture_url }}">
+        </div>
+        <div>
+            <p class="upload-view-text">
+                We recommend that you use a photo with a size of at least 98 x 98 pixels and 4 MB or less. 
+                Use a PNG or JPG file . Make sure your photo complies with YouTube community guidelines.
+            </p>
+            <form method="POST" action="" enctype="multipart/form-data">
+                {% csrf_token %}
+                <label class="video-upload">
+                    <input name="profile_picture" type="file" required>
+                    Upload Picutre
+                </label>
+                <input class="video-upload" type="submit" value="Save Picture">
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

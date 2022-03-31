@@ -19,12 +19,31 @@
 
 .channel-picture-container {
     height: 80px;
-    width: 110px;
+    width: 80px;
+    border-radius: 50%;
+    margin-right: 25px;
+    position: relative;
+    cursor: pointer;
 }
 
 .channel-picture {
     height: 80px;
     border-radius: 50%;
+}
+
+.change-channel-picture {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    opacity: 0;
+    transition: opacity 0.15s;
+    background-color: black;
+    padding: 12px;
+    border-radius: 50%;
+}
+
+.channel-picture-container:hover .change-channel-picture {
+    opacity: 0.5;
 }
 
 .channel-name {

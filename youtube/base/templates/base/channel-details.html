@@ -11,9 +11,13 @@
 <div class="channel-info-container">
     <div class="channel-info">
         <div class="channel-info-left">
-            <div class="channel-picture-container">
+            <a href="{% url 'change-profile' channel.id %}" class="channel-picture-container">
+                {% csrf_token %}
                 <img class="channel-picture" src="{{ channel.get_picture_url }}">
-            </div>
+                <div class="change-channel-picture">
+                    <img src="{% static 'icons/photo-camera.svg' %}">
+                </div>
+            </a>
             <div>
                 <p class="channel-name">
                     {{ channel.username }}

@@ -24,19 +24,22 @@
             </div>
         </div>
         <div class="channel-info-right">
-            {% if channel == request.user %}
-            <a href="{% url 'upload-video' %}" class="upload-video-button">UPLOAD VIDEO</a>
-            <a href="{% url 'logout' %}" class="logout-button">LOGOUT</a>
-            {% else %}
-                {% if subscribed %}
-                    <a class="watch-video-channel-subscribed" href="{% url 'subscribe-channel' channel.id %}">
-                        SUBSCRIBED
-                    </a>
+            {% if request.user.is_authenticated %}
+                {% if channel == request.user %}
+                    <a href="{% url 'upload-video' %}" class="upload-video-button">UPLOAD VIDEO</a>
+                    <a href="{% url 'logout' %}" class="logout-button">LOGOUT</a>
                 {% else %}
-                <a class="channel-details-subscribe-button" href="{% url 'subscribe-channel' channel.id %}">
-                    SUBSCRIBE
-                </a>
+                    {% if subscribed %}
+                        <a class="watch-video-channel-subscribed" href="{% url 'subscribe-channel' channel.id %}">
+                            SUBSCRIBED
+                        </a>
+                    {% else %}
+                    <a class="channel-details-subscribe-button" href="{% url 'subscribe-channel' channel.id %}">
+                        SUBSCRIBE
+                    </a>
+                    {% endif %}
                 {% endif %}
+            {% else %}
             {% endif %}
         </div>
     </div>

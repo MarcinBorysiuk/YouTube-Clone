@@ -10,13 +10,12 @@
     <div class="login-view-container">
         <div class="youtube-logo-container">
             <img class="login-youtube-logo" src="{% static 'icons/youtube-logo.svg'%}">
-            <p class="login-text">Please Login</p>
         </div>
         <div class="login-form-container">
             <form method="POST" action="">
                 {% csrf_token %}
-                <input class="login-input" type="text" name="email" placeholder="E-mail address">
-                <input class="login-input" type="password" name="password" placeholder="Password">
+                <input class="login-input" type="email" name="email" placeholder="E-mail address" required>
+                <input class="login-input" type="password" name="password" placeholder="Password" required>
                 <div class="button-container">
                     <button class="back-button" type="submit">
                         Back

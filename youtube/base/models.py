@@ -1,7 +1,9 @@
+from email.policy import default
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from PIL import Image
 from .helpers import get_video_length
+
 
 
 def video_directory_path(instance, filename):
@@ -17,7 +19,7 @@ def profile_directory_path(instance, filename):
 class Channel(AbstractUser):
     username = models.CharField(max_length=100, unique=True, null=True)
     email = models.EmailField(unique=True)
-    picture = models.ImageField(upload_to=profile_directory_path, null=True)
+    picture = models.ImageField(upload_to=profile_directory_path, null=True, default='/static/no-profile/no-profile.jpg')
     subscriptions = models.ManyToManyField('Channel', blank=True, related_name='channel_subscribers')
     subscribers = models.ManyToManyField('Channel', blank=True, related_name='channel_subscriptions')
     USERNAME_FIELD = 'email'

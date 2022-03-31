@@ -89,7 +89,7 @@
             <div class="middle-section-empty">
 
             </div>
-            {% if video.channel != request.user %}
+            {% if video.channel != request.user and request.user.is_authenticated %}
             <div>
                 {% if subscribed %}
                     <a class="watch-video-channel-subscribed" href="{% url 'subscribe-channel' video.channel.id %}">

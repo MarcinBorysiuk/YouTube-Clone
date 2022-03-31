@@ -4,7 +4,7 @@
 <div style="display: flex; justify-content: center; padding-bottom: 50px; padding-right: 72px;">
     <div class="login-view-container">
         <div class="youtube-logo-container">
-            <img class="youtube-logo" src="{% static 'icons/youtube-logo.svg'%}">
+            <img class="login-youtube-logo" src="{% static 'icons/youtube-logo.svg'%}">
         </div>
         <div class="login-form-container">
             <form method='POST'>
@@ -14,9 +14,9 @@
                 {{ form.password1 }}
                 {{ form.password2 }}
                 <div class="button-container">
-                    <button class="back-button" type="submit">
+                    <a href="{% url 'home' %}" class="back-button">
                         Back
-                    </button>
+                    </a>
                     <button class="red-login-button" type="submit">
                         Register
                     </button>

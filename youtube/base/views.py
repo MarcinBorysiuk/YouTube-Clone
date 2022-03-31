@@ -7,7 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .forms import CreateUserForm
 from django.db.models import Q
-from .helpers import validate_thumbnail_extension, validate_video_extension, validate_video_size, validate_video_title
+from .helpers import validate_thumbnail_extension, validate_video_extension, validate_video_size, validate_video_title, username_exists, email_exists
 
 
 def register(request):
@@ -15,11 +15,26 @@ def register(request):
 
     if request.method == 'POST':
         form = CreateUserForm(request.POST)
+        channel_name = form['username'].value()
+        email = form['email'].value()
+        password1 = form['password1'].value()
+        password2 = form['password2'].value()
+
+        if username_exists(channel_name, Channel):
+            messages.success(request, 'Channel name already exists')
+            return redirect('register')
+
+        if email_exists(email, Channel):
+            messages.success(request, 'E-mail address already exists')
+            return redirect('register')
+
+        if password1 != password2:
+            messages.success(request, 'Passwords did not match')
+            return redirect('register')
+        
         if form.is_valid():
             form.save()
-            user = form.cleaned_data.get('username')
-            messages.success(request, 'Account created successfully for ' + user)
-
+            messages.success(request, 'Account created successfully for ' + channel_name)
             return redirect('login')
 
     context = {'form': form}

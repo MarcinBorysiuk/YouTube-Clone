@@ -7,18 +7,13 @@
 }
 
 .youtube-logo-container {
-    text-align: center;
-    padding-top: 30px;
+    display: flex;
+    justify-content: center;
 }
 
 .login-youtube-logo {
-    height: 32px;
-}
-
-.login-text {
-    margin-top: 20px;
-    font-size: 20px;
-    font-weight: 400;
+    margin-top: 30px;
+    height: 38px;
 }
 
 .login-form-container {
@@ -71,17 +66,6 @@
     width: 80px;
     height: 40px;
     cursor: pointer;
-}
-
-.message-container {
-    padding-top: 30px;
-    text-align: center;
-}
-
-.message {
-    font-family: Roboto,Arial;
-    font-size: 14px;
-    margin-top: 5px;
 }
 
 .register {

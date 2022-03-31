@@ -16,6 +16,7 @@ def get_video_length(video_url):
         seconds = f'0{seconds}'
 
     return str(minutes) + ':' + str(seconds)
+    
 
 def validate_video_title(request, title, instance):
     video = instance.objects.filter(title=title)
@@ -46,6 +47,12 @@ def validate_thumbnail_extension(file, request):
         return True
     else:
         return messages.warning(request, 'Wrong Thumbnail format')
+
+def username_exists(username, instance):
+    return instance.objects.filter(username=username).exists()
+
+def email_exists(email, instance):
+    return instance.objects.filter(email=email).exists()
 
     
 

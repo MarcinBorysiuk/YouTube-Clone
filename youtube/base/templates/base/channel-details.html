@@ -8,6 +8,7 @@
 {% include 'base/header.html' %}
 {% include 'base/sidebar.html' %}
 
+
 <div class="channel-info-container">
     <div class="channel-info">
         <div class="channel-info-left">
@@ -118,8 +119,14 @@
             {% for video in videos %}
             <div>
                 <a href="{% url 'watch-video' video.id %}">
-                    <img class="video-thumbnail" src="{{ video.thumbnail.url }}">
+                    <div class="channel-details-thumbnail-container">
+                        <img class="video-thumbnail" src="{{ video.thumbnail.url }}">
+                        <div class="channel-details-video-time">
+                            {{ video.length }}
+                        </div>
+                    </div>
                 </a>
+                
                 <a class="video-title" href="{% url 'watch-video' video.id %}">
                     <p class="video-title">
                         {% if video.title|length < 40 %}

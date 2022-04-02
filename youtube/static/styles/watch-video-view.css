@@ -232,10 +232,25 @@
 
 .side-video-thumbnail-container {
     margin: 0 6px 6px 0;
+    position: relative;
+    width: 100%;
+}
+
+.side-video-time {
+    font-family: Roboto, Arial;
+    font-size: 10px;
+    font-weight: 500;
+    padding: 4px;
+    border-radius: 2px;
+    background-color: black;
+    color: white;
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
 }
 
 .side-video-thumbnail {
-    max-width: 180px;
+    width: 100%;
 }
 
 .side-video-info-container {

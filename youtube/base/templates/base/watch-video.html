@@ -252,6 +252,9 @@
             <div class="side-video-thumbnail-container">
                 <a href="{% url 'watch-video' video.id %}">
                     <img class="side-video-thumbnail" src="{{ video.thumbnail.url }}">
+                    <div class="side-video-time">
+                        {{ video.length }}
+                    </div>
                 </a>
             </div>
             <div class="side-video-info-container">

@@ -89,7 +89,7 @@
 .notifications-icon-container .tooltip {
     font-family: Roboto, Arial;
     position: absolute;
-    background-color: gray;
+    background-color: rgb(64, 64, 64);
     color: white;
     padding-top: 10px;
     padding-bottom: 10px;

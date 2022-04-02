@@ -19,7 +19,7 @@ def profile_directory_path(instance, filename):
 class Channel(AbstractUser):
     username = models.CharField(max_length=100, unique=True, null=True)
     email = models.EmailField(unique=True)
-    picture = models.ImageField(upload_to=profile_directory_path, null=True, default='/static/no-profile/no-profile.jpg')
+    picture = models.ImageField(upload_to=profile_directory_path, null=True, default='no-profile/no-profile.jpg')
     subscriptions = models.ManyToManyField('Channel', blank=True, related_name='channel_subscribers')
     subscribers = models.ManyToManyField('Channel', blank=True, related_name='channel_subscriptions')
     USERNAME_FIELD = 'email'
@@ -45,7 +45,7 @@ class Channel(AbstractUser):
         if self.picture:
             return self.picture.url
         else:
-            return '/static/no-profile/no-profile.jpg'
+            return '/media/no-profile/no-profile.jpg'
 
     def get_subscribers_count(self):
         return self.subscribers.all().count()
@@ -65,21 +65,26 @@ class Video(models.Model):
     views = models.IntegerField(default=0)
     uploaded = models.DateTimeField(auto_now_add=True)
     channel = models.ForeignKey(Channel, on_delete=models.CASCADE, related_name='videos', null=True)
-
+    
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
-        img = Image.open(self.thumbnail.path)
-
-        if img.width <= 300:
-            img_width = int(img.width*3)
-            img_height = int(img_width/1.8)
-            img = img.resize((img_width, img_height))
-            img.save(self.thumbnail.path)
-        else:
-            img_height = int(img.width/1.8)
-            img = img.resize((img.width, img_height))
-            img.save(self.thumbnail.path)
-
+        if self.thumbnail != None:
+            img = Image.open(self.thumbnail.path)
+            if img.width <= 300:
+                img_width = int(img.width*3)
+                img_height = int(img_width/1.8)
+                img = img.resize((img_width, img_height))
+                img.save(self.thumbnail.path)
+            else:
+                img_height = int(img.width/1.8)
+                img = img.resize((img.width, img_height))
+                img.save(self.thumbnail.path)
+        
+        
+    def delete(self, *args, **kwargs):
+        self.video.delete()
+        self.thumbnail.delete()
+        super().delete(*args, **kwargs)
 
     def get_duration(self):
         duration = get_video_length(self.video.path)

@@ -12,7 +12,6 @@
     <div class="channel-info">
         <div class="channel-info-left">
             <a href="{% url 'change-profile' channel.id %}" class="channel-picture-container">
-                {% csrf_token %}
                 <img class="channel-picture" src="{{ channel.get_picture_url }}">
                 <div class="change-channel-picture">
                     <img src="{% static 'icons/photo-camera.svg' %}">
@@ -118,8 +117,10 @@
         <div class="videos-container">
             {% for video in videos %}
             <div>
-                <a class="video-link" href="{% url 'watch-video' video.id %}">
+                <a href="{% url 'watch-video' video.id %}">
                     <img class="video-thumbnail" src="{{ video.thumbnail.url }}">
+                </a>
+                <a class="video-title" href="{% url 'watch-video' video.id %}">
                     <p class="video-title">
                         {% if video.title|length < 40 %}
                         {{ video.title }}
@@ -131,6 +132,12 @@
                 <p class="video-stats">
                     {{ video.views }} views &#183; {{ video.uploaded|timesince }} ago
                 </p>
+                {% if channel == request.user %}
+                    <a class="video-delete-button" href="{% url 'delete-video' video.id %}">
+                        <img class="delete-video-icon" src="{% static 'icons/delete-icon.svg' %}"> 
+                        <span class="delete-video-text">Delete Video</span>
+                    </a>
+                {% endif %}
             </div>
             {% endfor %}
         </div>

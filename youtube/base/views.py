@@ -7,7 +7,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .forms import CreateUserForm
 from django.db.models import Q
-from .helpers import validate_thumbnail_extension, validate_video_extension, validate_video_size, validate_video_title, username_exists, email_exists
+from .helpers import (validate_thumbnail_extension, validate_video_extension, validate_video_size, 
+validate_video_title, username_exists, email_exists, validate_picture_extension)
 
 
 def register(request):
@@ -34,7 +35,7 @@ def register(request):
         
         if form.is_valid():
             form.save()
-            messages.success(request, 'Account created successfully for ' + channel_name)
+            messages.success(request, 'Account created successfully for ' + channel_name + ' Please log in')
             return redirect('login')
 
     context = {'form': form}
@@ -238,7 +239,17 @@ def change_profile(request, id):
 
     if request.method == "POST":
         profile_picture = request.FILES.get('profile_picture')
-        channel.picture = profile_picture
-        channel.save()
-        return redirect('channel-details', id)
+        if validate_picture_extension(profile_picture, request):
+            channel.picture = profile_picture
+            channel.save()
+            return redirect('channel-details', id)
+        else:
+            return redirect('change-profile', id)
     return render(request, 'base/change-profile.html', {'channel': channel})
+
+def delete_video_confirmation(request, id):
+    video = Video.objects.get(id=id)
+    if request.method == "POST":
+        video.delete()
+        return redirect('channel-details', video.channel.id)
+    return render(request, 'base/delete-video.html', {'video': video})

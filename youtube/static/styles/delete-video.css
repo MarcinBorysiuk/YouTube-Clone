@@ -1,0 +1,46 @@
+.delete-video-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.delete-video-container {
+    margin-top: 20px;
+    min-width: 480px;
+    padding: 20px;
+    border: 1px solid rgb(224, 224, 224);
+    border-radius: 6px;
+}
+
+
+.delete-video-confirm-text {
+   font-size: 18px;
+   font-weight: 500;
+}
+
+.delete-buttons-container {
+    margin-top: 20px;
+}
+
+.delete-video-cancel-button {
+    padding: 7px 10px 7px 10px;
+    background-color: grey;
+    font-size: 16px;
+    text-decoration: none;
+    border: none;
+    border-radius: 4px;
+    margin-right: 10px;
+}
+
+.cancel-button-text {
+    text-decoration: none;
+    color: black;
+}
+
+.delete-video-confirm-button {
+    padding: 6px 10px 6px 10px;
+    font-size: 16px;
+    color: black;
+    border: none;
+    border-radius: 4px;
+    background-color: red;
+}

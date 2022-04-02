@@ -1,0 +1,31 @@
+{% extends 'base/main.html' %}
+{% load static %}
+
+{% block title %}
+{% endblock %}
+
+{% block content %}
+{% include 'base/header.html' %}
+{% include 'base/sidebar.html' %}
+
+<div class="delete-video-grid">
+    <div></div>
+    <div class="delete-video-container">
+        <form method="POST" action="">
+            {% csrf_token %}
+            <p class="delete-video-confirm-text">Are you sure you want to delete {{ video.title }}?</p>
+            <div class="delete-buttons-container">
+                <a class="delete-video-cancel-button" href="{% url 'channel-details' video.channel.id %}">
+                    <span class="cancel-button-text">
+                        Cancel
+                    </span>
+                </a>
+                <input class="delete-video-confirm-button" type="submit" value="Confirm">
+            </div> 
+        </form>
+    </div>
+    <div></div> 
+</div>
+
+
+{% endblock %}

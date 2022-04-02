@@ -131,6 +131,38 @@
     height: 100px;
 }
 
+.video-title {
+    text-decoration: none;
+    color: black;
+}
+
+.video-stats {
+    margin-top: -5px;
+}
+
+.video-delete-button {
+    display: flex; 
+    align-items: center; 
+    border: none; 
+    padding:4px 8px 4px 8px; 
+    border-radius: 4px; 
+    background-color: #dd0000; 
+    text-decoration: none;
+    cursor: pointer;
+    max-width: 105px;
+    margin-top: -10px;
+}
+
+.delete-video-icon {
+    height: 16px;
+}
+
+.delete-video-text {
+    font-size: 12px; 
+    color: white;
+    margin-left: 2px;
+}
+
 .single-channel-container {
     display: flex;
     flex-direction: column;

@@ -48,6 +48,14 @@ def validate_thumbnail_extension(file, request):
     else:
         return messages.warning(request, 'Wrong Thumbnail format')
 
+def validate_picture_extension(file, request):
+    valid_extensions = ['jpg', 'jpeg', 'png']
+    ext = file.name.split('.')[-1]
+    if ext.lower() in valid_extensions:
+        return True
+    else:
+        return messages.warning(request, 'Wrong Picture format')
+
 def username_exists(username, instance):
     return instance.objects.filter(username=username).exists()
 

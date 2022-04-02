@@ -1,8 +1,9 @@
 from django.urls import path
 from .views import (
-    home, search, login_page, logout_page, register, 
+    delete_video_confirmation, home, search, login_page, logout_page, register, 
     channel_details, subscribe_channel, upload_video, 
-    watch_video, like_video, dislike_video, change_profile
+    watch_video, like_video, dislike_video, change_profile,
+    delete_video_confirmation
     )
 
 urlpatterns = [
@@ -18,4 +19,5 @@ urlpatterns = [
     path('like/<int:id>/', like_video, name="like-video"),
     path("dislike/<int:id>/", dislike_video, name="dislike-video"),
     path("change-profile/<int:id>/", change_profile, name="change-profile"),
+    path("delete-video/<int:id>/", delete_video_confirmation, name="delete-video"),
 ]

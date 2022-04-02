@@ -13,7 +13,7 @@
         <p class="watch-video-title">{{ video.title }}</p>
         <div class="watch-video-info-container">
             <div class="watch-video-info-item">
-                <p class="watch-video-views">{{ video.views }} views &#183; {{ video.uploaded }}</p>
+                <p class="watch-video-views">{{ video.views }} views &#183; {{ video.uploaded.date }}</p>
             </div>
             <div class="middle-section-empty">
 
@@ -56,23 +56,28 @@
                 </form>
             </div>
        
-            <div class="watch-video-info-item">
+            <div class="share-icon-container">
                 <span class="material-icons-outlined video-icon">
                     share
                 </span>
                 <span class="like-icon-text">SHARE</span>
             </div>
-            <div class="watch-video-info-item">
+            <div class="clip-icon-container">
                 <span class="material-icons-outlined video-icon">
                     content_cut
                 </span>
                 <span class="like-icon-text">CLIP</span>
             </div>
-            <div class="watch-video-info-item">
+            <div class="save-icon-container">
                 <span class="material-icons-outlined video-icon">
                     playlist_add
                 </span>
                 <span class="like-icon-text">SAVE</span>
+            </div>
+            <div class="more-icon-container">
+                <span class="material-icons-outlined">
+                    more_vert
+                </span>
             </div>
         </div>
 
@@ -154,7 +159,7 @@
                 <div>
                     <p class="comment-channel-name">{{ comment.channel.username }}
                         <span class="comment-date">
-                            {{ comment.created|timesince }} ago
+                            {{ comment.created.date }}
                         </span>
                     </p>
                     <p class="comment-body">{{ comment.body }}</p>
@@ -217,7 +222,7 @@
                                 </div>
                                 <div>
                                     <p class="reply-channel-name">
-                                        {{ reply.channel.username }} <span class="reply-date"> {{ reply.created|timesince }} ago</span>
+                                        {{ reply.channel.username }} <span class="reply-date"> {{ reply.created.date }}</span>
                                     </p>
                                     <p class="reply-body">
                                         {{ reply.body }}
@@ -259,10 +264,14 @@
             </div>
             <div class="side-video-info-container">
                 <a class="side-video-link" href="{% url 'watch-video' video.id %}">
-                    <p class="side-video-title">{{ video.title }}</p>
+                    {% if video.title|length < 55 %}
+                        <p class="side-video-title">{{ video.title }}</p>
+                    {% else %}
+                        <p class="side-video-title">{{ video.title|slice:":55" }}...</p>
+                    {% endif %}
                 </a>
                 <p class="side-video-channel">{{ video.channel.username }}</p>
-                <p class="side-video-views">{{ video.views }} views &bull; {{ video.uploaded|timesince }} ago</p>
+                <p class="side-video-views">{{ video.views }} views &bull; {{ video.uploaded.date }}</p>
             </div>
         </div>
         {% endfor %}

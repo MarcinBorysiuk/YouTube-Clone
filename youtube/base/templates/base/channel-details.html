@@ -30,17 +30,21 @@
         <div class="channel-info-right">
             {% if request.user.is_authenticated %}
                 {% if channel == request.user %}
-                    <a href="{% url 'upload-video' %}" class="upload-video-button">UPLOAD VIDEO</a>
-                    <a href="{% url 'logout' %}" class="logout-button">LOGOUT</a>
+                    <a href="{% url 'upload-video' %}" class="upload-video-button">
+                        <span class="white-text">UPLOAD VIDEO</span>
+                    </a>
+                    <a href="{% url 'logout' %}" class="logout-button">
+                        <span class="white-text">LOGOUT</span>
+                    </a>
                 {% else %}
                     {% if subscribed %}
                         <a class="watch-video-channel-subscribed" href="{% url 'subscribe-channel' channel.id %}">
                             SUBSCRIBED
                         </a>
                     {% else %}
-                    <a class="channel-details-subscribe-button" href="{% url 'subscribe-channel' channel.id %}">
-                        SUBSCRIBE
-                    </a>
+                        <a class="channel-details-subscribe-button" href="{% url 'subscribe-channel' channel.id %}">
+                            SUBSCRIBE
+                        </a>
                     {% endif %}
                 {% endif %}
             {% else %}
@@ -128,16 +132,14 @@
                 </a>
                 
                 <a class="video-title" href="{% url 'watch-video' video.id %}">
-                    <p class="video-title">
-                        {% if video.title|length < 40 %}
-                        {{ video.title }}
-                        {% else %}
-                        {{ video.title|slice:":40"}}...
-                        {% endif %}
-                    </p>
+                    {% if video.title|length < 55 %}
+                        <p class="video-title">{{ video.title }}</p>
+                    {% else %}
+                        <p class="video-title">{{ video.title|slice:":55"}}...</p>
+                    {% endif %}
                 </a>
                 <p class="video-stats">
-                    {{ video.views }} views &#183; {{ video.uploaded|timesince }} ago
+                    {{ video.views }} views &#183; {{ video.uploaded.date }}
                 </p>
                 {% if channel == request.user %}
                     <a class="video-delete-button" href="{% url 'delete-video' video.id %}">

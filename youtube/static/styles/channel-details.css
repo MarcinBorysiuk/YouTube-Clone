@@ -79,6 +79,10 @@
     text-decoration: none;
 }
 
+.white-text {
+    color: white
+}
+
 .channel-details-subscribe-button {
     background-color: #dd0000;
 }
@@ -127,6 +131,57 @@
     row-gap: 50px;
 }
 
+.channels-container {
+    column-gap: 100px;
+}
+
+@media(min-width: 2400px) {
+    .channels-container {
+        grid-template-columns: repeat(8, 1fr);
+    }
+}
+
+@media(min-width: 1600px) {
+    .channels-container {
+        grid-template-columns: repeat(7, 1fr);
+    }
+}
+
+@media(max-width: 1400px) {
+    .channels-container,
+    .videos-container {
+        grid-template-columns: repeat(5, 1fr);
+    }
+}
+
+@media(max-width: 1300px) {
+    .channels-container,
+    .videos-container {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media(max-width: 1050px) {
+    .channels-container,
+    .videos-container {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media(max-width: 900px) {
+    .channels-container,
+    .videos-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media(max-width: 650px) {
+    .channels-container,
+    .videos-container {
+        grid-template-columns: 1fr;
+    }
+}
+
 .channel-details-thumbnail-container {
     position: relative;
 }
@@ -145,7 +200,6 @@
 }
 
 .video-thumbnail {
-    height: 100px;
     width: 100%
 }
 
@@ -177,6 +231,7 @@
 
 .delete-video-text {
     font-size: 12px; 
+    font-weight: 500;
     color: white;
     margin-left: 2px;
 }
@@ -189,8 +244,8 @@
 }
 
 .subsrciption-channel-picture {
-    height: 100px;
-    width: 100px;
+    width: 100%;
+    max-width: 225px;
     border-radius: 50%;
     margin-bottom: 10px;
 }

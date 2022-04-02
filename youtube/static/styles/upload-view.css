@@ -1,36 +1,46 @@
 .upload-view-container {
-  margin-left: 100px;
-  padding: 20px;
-  width: 400px;
-  background-color: rgb(255, 255, 255);
-  border: solid rgb(202, 202, 202) 1px;
-  border-radius: 6px; 
-    
+    max-width: 600px;
 }
 
+.upload-view-title {
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.top-section-container {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid rgb(220, 220, 220);
+}
+
+
 .upload-view-picture {
-  margin-bottom: 10px;
-  margin-left: 100px;
+  min-width: 200px;
+}
+
+.video-requirements-list {
+    margin-top: 30px;
+    font-size: 14px;
+    color: grey
 }
 
 .upload-form {
-  display: flex;
-  flex-direction: column;
-  row-gap: 10px;
-  justify-content: center;
-  align-items: center;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin-top: 20px;
 }
 
 .title-input{
     padding: 10px;
-    width: 250px;
+    width: 290px;
     border: solid rgb(202, 202, 202) 1px;
     border-radius: 6px;  
+    margin-bottom: 10px;
 }
 
 .textarea {
   font-family: Roboto, Arial;
-  width: 250px;
+  width: 290px;
   resize: none;
   height: 100px;
   border: solid rgb(202, 202, 202) 1px;
@@ -49,25 +59,41 @@ input[type="file"] {
     display: none;
 }
 
-.video-upload {
+.video-upload-button {
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
     padding: 14px;
     border: none;
     border-radius: 6px;
     color: white;
     background-color: #065fd4;
     cursor: pointer;
+    width: 170px;
+    margin-bottom: 10px;
 }
 
-.thumbnail-upload {
+
+.thumbnail-upload-button {
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
     padding: 14px;
     border: none;
     border-radius: 6px;
     color: white;
     background-color: #065fd4;
     cursor: pointer;
+    width: 210px;
+}
+
+.submit-button-container {
+    margin-top: 20px;
 }
 
 .upload-submit-button {
+    display: flex;
+    align-items: center;
     padding: 10px;
     background-color: #dd0000;
     color: white;
@@ -76,4 +102,24 @@ input[type="file"] {
     border: none;
     border-radius: 6px;
     cursor: pointer;
+    
+}
+
+.submit-button-arrow {
+    margin-left: 10px;
+}
+
+@media(max-width:720px) {
+    .top-section-container {
+        flex-direction: column;
+    }
+}
+
+@media(max-width: 650px) {
+    .upload-form {
+        grid-template-columns: 1fr;
+    }
+    .title-decription-container {
+        margin-top: 10px;
+    }
 }

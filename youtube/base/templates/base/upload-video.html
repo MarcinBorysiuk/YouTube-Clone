@@ -8,24 +8,58 @@
 {% include 'base/header.html' %}
 {% include 'base/sidebar.html' %}
 <div class="upload-view-container">
-  <div class="upload-view-picture">
-    <img src="https://www.gstatic.com/youtube/img/creator/no_content_illustration_upload_video_v3.svg">
+  <p class="upload-view-title">
+    Upload your video
+  </p>
+  <div class="top-section-container">
+    <div>
+      <img class="upload-view-picture" src="{% static 'icons/upload-video-picture.svg' %}">
+    </div>
+    <div class="video-requirements-list">
+        <ul>
+            <li>
+                - Make sure your video is in one of these formats -
+                 <strong>'mp4', 'mov', 'wmv', 'avi', 'mpeg-1', 'mpeg-2', 'mpeg4', 'mpg', 'flv'</strong>
+            </li>
+            <li>
+                - Your video can't be bigger then <strong>50MB</strong>
+            </li>
+            <li>
+                - Make sure your thumbnail is in one of these formats - <strong>'jpg', 'jpeg', 'png', 'webp'</strong>
+            </li>
+            <li>
+                - Provide a valid title for your video (description is optional)
+            </li>
+        </ul>
+    </div>
   </div>
+  
     
   <form class="upload-form" method="POST" action="" enctype="multipart/form-data" >
       {% csrf_token %}
-      <label class="video-upload">
-          <input name="video" type="file" required>
-          Upload Video
-      </label>
-      <label class="thumbnail-upload">
-          <input name="thumbnail" type="file" required>
-          Upload Thumbnail
-      </label>
-
-      <input class="title-input" name="title" type="text" placeholder="Title" required>
-      <textarea class="textarea" name="desc" type="text" placeholder="Description"></textarea>
-      <input class="upload-submit-button" type="submit" value="Submit">
+      <div>
+        <label class="video-upload-button">
+            <input name="video" type="file" required>
+            <img src="{% static 'icons/upload-video.svg' %}">
+            Upload Video
+        </label>
+        <label class="thumbnail-upload-button">
+            <input name="thumbnail" type="file" required>
+            <img src="{% static 'icons/upload-thumbnail.svg' %}">
+            Upload Thumbnail
+        </label>
+      </div>
+      <div class="title-decription-container">
+            <input class="title-input" name="title" type="text" placeholder="Title" required>
+            <br>
+            <textarea class="textarea" name="desc" type="text" placeholder="Description"></textarea>
+      </div>
+      <div class="submit-button-container">
+        <button class="upload-submit-button" type="submit">
+            Submit Video
+            <img class="submit-button-arrow" src="{% static 'icons/arrow-right.svg' %}">
+        </button>
+      </div>
   </form>
 </div>
 {% endblock %}

@@ -1,1 +1,1 @@
-web: gunicorn youtube.wsgi
+web: gunicorn --pythonpath youtube youtube.wsgi

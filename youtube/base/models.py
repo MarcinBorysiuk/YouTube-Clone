@@ -65,6 +65,12 @@ class Video(models.Model):
     uploaded = models.DateTimeField(auto_now_add=True)
     channel = models.ForeignKey(Channel, on_delete=models.CASCADE, related_name='videos', null=True)
     
+    def __str__(self):
+        return self.title
+
+    def __repr__(self):
+        return self.title
+    
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
         if self.thumbnail != None:
@@ -117,6 +123,9 @@ class Comment(models.Model):
 
     def get_replies_count(self):
         return self.replies.all().count()
+
+    class Meta:
+        ordering = ['-created']
 
 
 class Reply(models.Model):

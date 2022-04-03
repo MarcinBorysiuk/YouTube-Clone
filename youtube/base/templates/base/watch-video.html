@@ -98,12 +98,12 @@
             <div>
                 {% if subscribed %}
                     <a class="watch-video-channel-subscribed" href="{% url 'subscribe-channel' video.channel.id %}">
-                        SUBSCRIBED
+                        <span class="grey-text">SUBSCRIBED</span>
                     </a>
                 {% else %}
-                <a class="subscribe-button" href="{% url 'subscribe-channel' video.channel.id %}">
-                    SUBSCRIBE
-                </a>
+                    <a class="subscribe-button" href="{% url 'subscribe-channel' video.channel.id %}">
+                        <span class="white-text">SUBSCRIBE</span>
+                    </a>
                 {% endif %}
             </div>
             {% endif %}
@@ -143,7 +143,7 @@
 
                         </div>
                         <div>
-                            <button class="comment-button">CANCEL</button>
+                            <button type="reset" class="comment-button">CANCEL</button>
                             <button type="submit" class="comment-button">COMMENT</button>
                         </div>
                     </div>
@@ -198,7 +198,7 @@
                 
                                         </div>
                                         <div>
-                                            <button class="reply-button" onclick="writeReply('reply-form-{{ comment.id }}')">CANCEL</button>
+                                            <button type="reset" class="reply-button" onclick="writeReply('reply-form-{{ comment.id }}')">CANCEL</button>
                                             <button type="submit" class="reply-button">REPLY</button>
                                         </div>
                                     </div>

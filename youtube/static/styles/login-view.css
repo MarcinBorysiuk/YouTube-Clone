@@ -12,7 +12,7 @@
 }
 
 .login-youtube-logo {
-    margin-top: 30px;
+    margin-top: 50px;
     height: 38px;
 }
 
@@ -24,7 +24,7 @@
 .login-input {
     font-size: 14px;
     width: 100%;
-    height: 30px;
+    height: 40px;
     padding: 6px;
     margin-bottom: 20px;
     border: 1px solid rgb(223, 223, 223);
@@ -44,40 +44,51 @@
 }
 
 .back-button {
+    padding: 10px 16px 10px 16px;
     background-color: white;
     border: 1px solid grey;
     color: grey;
     border-radius: 4px;
     font-family: Roboto, Arial;
     font-size: 16px;
-    width: 80px;
-    height: 40px;
     margin-right: 20px;
+    text-decoration: none;
     cursor: pointer;
 }
 
+.back-button-text {
+    color: grey; 
+}
+
 .red-login-button {
+    padding: 10px 16px 10px 16px;
     background-color: white;
     color: #dd0000;
     border: 1px solid #dd0000;
     border-radius: 4px;
     font-family: Roboto, Arial;
     font-size: 16px;
-    width: 80px;
-    height: 40px;
     cursor: pointer;
 }
 
 .register {
-    padding-top: 22px;
+    margin-top: 22px;
     text-align: center;
     font-family: Roboto, Arial;
     font-size: 14px;
 }
 
+.register-text {
+    font-size: 16px;
+    color: grey
+}
+
 .register-link {
-    color:#065fd4;
+    padding: 10px 16px 10px 16px;
     text-decoration: none;
+    color: #35ac23ee;
+    border: 1px solid #35ac23ee;
+    border-radius: 4px;
 }
 
 .register-button-container {

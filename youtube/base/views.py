@@ -93,13 +93,15 @@ def channel_details(request, id):
     subscriptions = [item for item in channel.subscriptions.all()]
     videos = [item for item in channel.videos.all()]
     channel_subscribed = channel.is_subscribing(request.user)
+    all_views = sum([video.views for video in videos])
     
     context = {
         'channel': channel, 
         'subscriptions': subscriptions, 
         'videos': videos,
         'current_option': current_option,
-        'subscribed': channel_subscribed
+        'subscribed': channel_subscribed,
+        'views': all_views
     }
     return render(request, 'base/channel-details.html', context)
 
@@ -144,27 +146,30 @@ def watch_video(request, id):
     channel_subscribed = video.channel.is_subscribing(channel)
 
     if request.method == "POST":
-        if 'comment_body' in request.POST:
-            body = request.POST.get('comment_body')
-            new_comment = Comment(
-                channel=channel,
-                video=video,
-                body=body
-            )
-            new_comment.save()
-            return redirect('watch-video', id)
+        if channel.is_authenticated:
+            if 'comment_body' in request.POST:
+                body = request.POST.get('comment_body')
+                new_comment = Comment(
+                    channel=channel,
+                    video=video,
+                    body=body
+                )
+                new_comment.save()
+                return redirect('watch-video', id)
 
-        elif 'reply_body' in request.POST:
-            body = request.POST.get('reply_body')
-            comment_id = request.POST.get('comment_id')
-            comment = Comment.objects.get(id=comment_id)
-            new_reply = Reply(
-                channel=channel,
-                comment=comment,
-                body=body
-            )
-            new_reply.save()
-            return redirect('watch-video', id)
+            elif 'reply_body' in request.POST:
+                body = request.POST.get('reply_body')
+                comment_id = request.POST.get('comment_id')
+                comment = Comment.objects.get(id=comment_id)
+                new_reply = Reply(
+                    channel=channel,
+                    comment=comment,
+                    body=body
+                )
+                new_reply.save()
+                return redirect('watch-video', id)
+        else:
+            return redirect('login')
 
     context = {'video': video, 'comments': comments, 'side_videos': side_videos, 'subscribed': channel_subscribed}
     return render(request, 'base/watch-video.html', context)

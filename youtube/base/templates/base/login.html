@@ -17,21 +17,21 @@
                 <input class="login-input" type="email" name="email" placeholder="E-mail address" required>
                 <input class="login-input" type="password" name="password" placeholder="Password" required>
                 <div class="button-container">
-                    <button class="back-button" type="submit">
-                        Back
-                    </button>
+                    <a class="back-button" href="{% url 'home' %}">
+                        <span class="back-button-text">Back</span>
+                    </a>
                     <button class="red-login-button" type="submit">
                         Login
                     </button>
                 </div>
             </form>
             <div class="register">
-                <p>
+                <p class="register-text">
                     Do not have account? 
                 </p>
                 <p>
                     <a class="register-link" href="{% url 'register' %}">
-                        register here
+                        Register
                     </a>
                 </p>
             </div>

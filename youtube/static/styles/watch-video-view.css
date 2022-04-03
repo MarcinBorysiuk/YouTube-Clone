@@ -19,8 +19,7 @@
     font-weight: 400;
 }
 
-.watch-video-info-container,
-.comment-filter-container {
+.watch-video-info-container {
     height: 55px;
     display: flex;
     flex-direction: row;
@@ -30,8 +29,10 @@
 }
 
 .comment-filter-container {
-    margin-top: 10px;
-    border: none;
+    margin-top: 14px;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
 }
 
 .watch-video-info-item,
@@ -146,6 +147,7 @@
 
 .comment-text {
     font-size: 18px;
+    margin-bottom: 0;
 }
 
 .comment-form-container {

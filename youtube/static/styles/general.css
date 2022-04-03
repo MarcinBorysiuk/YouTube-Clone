@@ -41,3 +41,8 @@ button:focus {
 .material-icons {
     color: rgb(9, 91, 197)
 }
+
+.message {
+    text-align: center;
+    margin: 0;
+}

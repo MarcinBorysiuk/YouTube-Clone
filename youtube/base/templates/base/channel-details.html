@@ -39,11 +39,11 @@
                 {% else %}
                     {% if subscribed %}
                         <a class="watch-video-channel-subscribed" href="{% url 'subscribe-channel' channel.id %}">
-                            SUBSCRIBED
+                            <span class="grey-text">SUBSCRIBED</span>
                         </a>
                     {% else %}
                         <a class="channel-details-subscribe-button" href="{% url 'subscribe-channel' channel.id %}">
-                            SUBSCRIBE
+                            <span class="white-text">SUBSCRIBE</span>
                         </a>
                     {% endif %}
                 {% endif %}
@@ -110,8 +110,8 @@
             </div>
             <div>
                 <p class="stat-option-text">Statistics</p>
-                <p class="stat-option-text">Date joined: 24 Dec 2021</p>
-                <p class="stat-option-text">Views: 1223414</p>
+                <p class="stat-option-text">Date joined: {{ channel.date_joined.date }}</p>
+                <p class="stat-option-text">Views: {{ views }}</p>
             </div>
         </div>
     {% else %}

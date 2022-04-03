@@ -83,8 +83,13 @@
     color: white
 }
 
+.grey-text {
+    color: grey;
+}
+
 .channel-details-subscribe-button {
     background-color: #dd0000;
+    text-decoration: none;
 }
 
 .channel-options {

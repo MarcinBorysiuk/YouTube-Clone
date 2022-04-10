@@ -45,7 +45,7 @@
 					</div>
 					<p class="search-view-video-description"> 
 						{% if video.description %}
-						{{ video.description }}
+						{{ video.description|slice:":160" }}
 						{% endif %}
 					</p>
 				</div>

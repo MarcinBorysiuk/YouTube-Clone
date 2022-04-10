@@ -76,7 +76,6 @@
     
 }
 
-
 .search-view-video-info {
     padding: 5px;
 }
@@ -121,5 +120,5 @@
 .search-view-video-description {
     font-size: 12px;
     color: gray;
-    margin-top: 12px;
+    margin: 0;
 }

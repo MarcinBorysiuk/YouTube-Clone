@@ -239,7 +239,19 @@
     grid-template-columns: 1fr 1fr;
 }
 
-@media(max-width: 1050px) {
+@media(max-width: 1000px) {
+    body {
+        margin-right: 0;
+        margin-bottom: 0;
+        padding-right: 0;
+        padding-bottom: 0;
+    }
+    .watch-video-container {
+        padding: 0;
+    }
+    .side-videos-sort {
+        display: none;
+    }
     .side-video {
         display: none;
     }

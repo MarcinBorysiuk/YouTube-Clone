@@ -38,6 +38,9 @@
             </div>
             <div class="tooltip">Notifications</div>
         </div>
+        <div class="search-icon-container">
+            <img class="search-icon" src="{% static 'icons/search.svg' %}">
+        </div>
         <a href="{% url 'channel-details' request.user.id %}">
             <img class="current-user-picture" src="{{ request.user.get_picture_url }}">
         </a>

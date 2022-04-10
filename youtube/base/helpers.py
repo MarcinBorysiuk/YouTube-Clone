@@ -62,6 +62,9 @@ def username_exists(username, instance):
 def email_exists(email, instance):
     return instance.objects.filter(email=email).exists()
 
+def video():
+    return 'hello'
+
     
 
     

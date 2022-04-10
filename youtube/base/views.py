@@ -1,3 +1,4 @@
+import django
 from django.http import JsonResponse
 from django.urls import reverse
 from django.shortcuts import get_object_or_404, render, redirect
@@ -169,6 +170,7 @@ def watch_video(request, id):
                 new_reply.save()
                 return redirect('watch-video', id)
         else:
+            messages.success(request, 'Please login to comment or like videos')
             return redirect('login')
 
     context = {'video': video, 'comments': comments, 'side_videos': side_videos, 'subscribed': channel_subscribed}

@@ -44,6 +44,38 @@
     }
 }
 
+@media(max-width: 600px) {
+    .hamburger-menu,
+    .search-view-filter,
+    .middle-section,
+    .upload-icon-container,
+    .youtube-apps-icon-container,
+    .sidebar {
+        display: none;
+    }
+    body {
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+    .search-view-container {
+        margin-left: 0;
+        margin-right: 0;
+    }
+    .youtube-logo {
+        height: 22px;
+        margin-left: 6px;
+    }
+    .right-section {
+        width: 120px;
+        margin-right: 6px;
+    }
+    .search-icon-container {
+        display: inline;
+        cursor: pointer;
+    }
+    
+}
+
 
 .search-view-video-info {
     padding: 5px;
@@ -62,6 +94,7 @@
 }
 
 .search-view-video-details {
+    margin: 0 0 6px 0;
     font-size: 13px;
     color: gray;
 }
@@ -69,7 +102,7 @@
 .search-view-channel-grid {
     display: flex;
     align-items: center;
-    margin-top: 12px;
+    
 }
 
 .search-view-profile-picture {
@@ -80,6 +113,7 @@
 }
 
 .search-view-channel-name {
+    margin-top: 14px;
     font-size: 13px;
     color: gray;
 }

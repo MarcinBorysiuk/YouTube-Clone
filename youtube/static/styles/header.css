@@ -116,6 +116,10 @@
     height: 25px;
 }
 
+.search-icon-container {
+    display: none;
+}
+
 .voice-search-button {
     height: 40px;
     width: 40px;

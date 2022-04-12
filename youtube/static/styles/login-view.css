@@ -79,16 +79,23 @@
 }
 
 .register-text {
-    font-size: 16px;
+    font-size: 14px;
     color: grey
 }
 
 .register-link {
     padding: 10px 16px 10px 16px;
     text-decoration: none;
-    color: #35ac23ee;
-    border: 1px solid #35ac23ee;
+    color: white;
+    background-color: #dd0000;
+    border: 1px solid #dd0000;
     border-radius: 4px;
+}
+
+.register-link:hover,
+.red-login-button:hover,
+.back-button:hover {
+    opacity: 0.8;
 }
 
 .register-button-container {

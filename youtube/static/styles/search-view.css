@@ -1,6 +1,7 @@
 .search-view-container {
-    margin-left: 5%;
-    margin-right: 5%;
+    padding-top: 80px;
+    padding-left: 130px;
+    padding-right: 90px;
 }
 
 .search-view-filter {
@@ -53,13 +54,9 @@
     .sidebar {
         display: none;
     }
-    body {
+    .search-view-container {
         padding-left: 0px;
         padding-right: 0px;
-    }
-    .search-view-container {
-        margin-left: 0;
-        margin-right: 0;
     }
     .youtube-logo {
         height: 22px;
@@ -73,7 +70,6 @@
         display: inline;
         cursor: pointer;
     }
-    
 }
 
 .search-view-video-info {

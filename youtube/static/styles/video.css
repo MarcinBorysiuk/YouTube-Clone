@@ -1,20 +1,18 @@
 .videos-grid {
+    padding-left: 96px;
+    padding-top: 80px;
+    padding-right: 20px;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     column-gap: 15px;
-    row-gap: 40px;
+    row-gap: 25px;
 }
 
 @media (max-width: 600px) {
-    body {
-        margin-left: 0px;
-        margin-right: 0px;
-        margin-bottom: 0px;
-        padding-left: 0px;
-        padding-right: 0px;
-        padding-bottom: 0px;
-    }
+    
     .videos-grid {
+        padding-left: 0;
+        padding-right: 0;
         grid-template-columns: 1fr;
     }
 }

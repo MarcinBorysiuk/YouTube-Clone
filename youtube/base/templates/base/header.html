@@ -33,9 +33,6 @@
         {% if request.user.is_authenticated %}
         <div class="notifications-icon-container">
             <img class="notification-icon" src="{% static 'icons/notifications.svg' %}">
-            <div class="notifications-count">
-                1
-            </div>
             <div class="tooltip">Notifications</div>
         </div>
         <div class="search-icon-container">
@@ -45,6 +42,9 @@
             <img class="current-user-picture" src="{{ request.user.get_picture_url }}">
         </a>
         {% else %}
+        <div class="search-icon-container">
+            <img class="search-icon" src="{% static 'icons/search.svg' %}">
+        </div>
         <a class="login-button" href="{% url 'login' %}">SIGN IN</a>
         {% endif %}
     </div>

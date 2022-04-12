@@ -36,7 +36,7 @@ def register(request):
         
         if form.is_valid():
             form.save()
-            messages.success(request, 'Account created successfully for ' + channel_name + ' Please log in')
+            messages.success(request, 'Account created successfully for ' + channel_name + ', please log in')
             return redirect('login')
 
     context = {'form': form}
@@ -71,6 +71,7 @@ def logout_page(request):
 
 def home(request):
     videos = Video.objects.all()
+    videos = videos
     context = {'videos': videos}
     return render(request, 'base/home.html', context)
 

@@ -1,3 +1,8 @@
+.change-profile-container {
+    padding-top: 80px;
+    padding-left: 96px;
+}
+
 .upload-view-title {
     font-size: 20px;
     font-weight: 500;
@@ -45,4 +50,22 @@
     height: 140px;
     width: 140px;
     border-radius: 50%;
+}
+@media(max-width:600px) {
+    .change-profile-container {
+        padding-left: 10px;
+        padding-right: 10px;
+        text-align: center;
+    }
+    .upload-channel-picture-container,
+    .upload-view-text {
+        max-width: 600px;
+    }
+   
+}
+
+@media(max-width:850px) {
+    .upload-form-container {
+        grid-template-columns: 1fr;
+    }
 }

@@ -1,5 +1,28 @@
 .upload-view-container {
     max-width: 600px;
+    padding-top: 80px;
+    padding-left: 96px;
+}
+
+@media(max-width: 600px) {
+    .upload-view-container {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    .upload-form {
+        grid-template-columns: 1fr;
+        
+    }
+}
+
+@media(max-width:720px) {
+    .top-section-container {
+        flex-direction: column;
+    }
+    .upload-view-title {
+        text-align: center;
+    }
+
 }
 
 .upload-view-title {
@@ -109,17 +132,3 @@ input[type="file"] {
     margin-left: 10px;
 }
 
-@media(max-width:720px) {
-    .top-section-container {
-        flex-direction: column;
-    }
-}
-
-@media(max-width: 650px) {
-    .upload-form {
-        grid-template-columns: 1fr;
-    }
-    .title-decription-container {
-        margin-top: 10px;
-    }
-}

@@ -288,6 +288,18 @@
     }
 }
 
+@media(min-width: 951px) {
+    .watch-video-container {
+        padding-left: 40px;
+    }
+}
+
+@media(min-width: 1200px) {
+    .watch-video-container {
+        padding-left: 80px;
+    }
+}
+
 .side-video-thumbnail-container {
     margin: 0 6px 6px 0;
     position: relative;

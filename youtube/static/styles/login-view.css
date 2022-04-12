@@ -1,6 +1,18 @@
 .login-view-container {
+    display: flex; 
+    justify-content: center; 
+    margin-top: 100px;
+}
+
+@media(max-width: 600px) {
+    .login-view-container {
+        margin-top: 50px;
+    }
+}
+
+.login-view-form {
     background-color: white;
-    width: 470px;
+    width: 460px;
     height: 500px;
     border: 1px rgb(223, 223, 223) solid;
     border-radius: 8px;

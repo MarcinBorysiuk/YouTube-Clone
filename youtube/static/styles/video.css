@@ -15,6 +15,9 @@
         padding-right: 0;
         grid-template-columns: 1fr;
     }
+    .video-info-grid {
+        padding-left: 10px;
+    }
 }
 
 @media (min-width: 601px) {

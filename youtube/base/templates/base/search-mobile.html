@@ -1,0 +1,15 @@
+{% extends 'base/main.html' %}
+{% load static %}
+{% block title %}
+  Search
+{% endblock %}
+
+{% block content %}
+    {% include 'base/header.html' %}
+    <div class="search-bar-mobile-container">
+        <form class="search-form" method="GET" action="/search">
+            <input class="search-bar" type="text" placeholder="Search on YouTube" name="q" 
+            value="{% if search_query %}{{ search_query }}{% endif %}" required>
+        </form>
+    </div>
+{% endblock %}

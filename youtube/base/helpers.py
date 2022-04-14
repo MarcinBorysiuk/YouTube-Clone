@@ -27,10 +27,10 @@ def validate_video_title(request, title, instance):
         return False
 
 def validate_video_size(file, request):
-    if file.size < 41943040:
+    if file.size < 20971520:
         return True
     else:
-        return messages.warning(request, 'Maximum size of Video is 50MB')
+        return messages.warning(request, 'Maximum size of Video is 20MB')
 
 def validate_video_extension(file, request):
     valid_extensions = ['mp4', 'mov', 'wmv', 'avi', 'mpeg-1', 'mpeg-2', 'mpeg4', 'mpg', 'flv']

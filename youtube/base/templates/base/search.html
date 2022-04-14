@@ -8,6 +8,7 @@
     {% include 'base/header.html' %}
     {% include 'base/sidebar.html' %}
     <div class="search-view-container">
+		{% if videos|length > 0 %}
 			<div class="search-view-filter">
 				<div>
 					<img class="filter-icon" src="{% static 'icons/filter-icon.png' %}">
@@ -16,7 +17,6 @@
 					FILTER
 				</div>
 			</div>
-
 			{% for video in videos %}
 			<div class="search-view-video-grid">
 				<div>
@@ -51,6 +51,18 @@
 				</div>
 			</div>
 			{% endfor %}
+		{% else %}
+			<div class="no-results-container">
+				<div>
+					<img class="no-results-image"
+					src="https://cdn3.iconfinder.com/data/icons/search-engine-optimization-seo-3/320/loupe_magnifier_magnifying_search-512.png">
+					<p class="no-results-text">
+						Sorry...We couldn't find any results<br/>
+						Try again
+					</p>
+				</div>
+			</div>	
+		{% endif %}
     </div>
     
 {% endblock %}

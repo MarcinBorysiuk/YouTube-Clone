@@ -81,19 +81,22 @@ def search(request):
     videos = Video.objects.filter(
         Q(title__icontains=q)
         )
-
+    
     videos = sorted(videos, key=lambda video:video.views, reverse=True)
    
     context = {'videos': videos}
     return render(request, 'base/search.html', context)
+
+def search_view_mobile(request):
+    return render(request, 'base/search-mobile.html')
 
 
 def channel_details(request, id):
 
     current_option = request.GET.get('q') if request.GET.get('q') != None else ''
     channel = Channel.objects.get(id=id)
-    subscriptions = 10*[item for item in channel.subscriptions.all()]
-    videos = 10*[item for item in channel.videos.all()]
+    subscriptions = [item for item in channel.subscriptions.all()]
+    videos = [item for item in channel.videos.all()]
     channel_subscribed = channel.is_subscribing(request.user)
     all_views = sum([video.views for video in videos])
     

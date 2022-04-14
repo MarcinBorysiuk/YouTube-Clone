@@ -17,7 +17,6 @@ class CreateUserForm(UserCreationForm):
         widget=forms.PasswordInput(attrs={'class':'login-input','placeholder':'Confirm Password'}),
         )
     
-
     class Meta:
         model = Channel
         fields = ['email', 'username', 'password1', 'password2']

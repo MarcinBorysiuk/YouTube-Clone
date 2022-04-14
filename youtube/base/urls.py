@@ -3,12 +3,13 @@ from .views import (
     delete_video_confirmation, home, search, login_page, logout_page, register, 
     channel_details, subscribe_channel, upload_video, 
     watch_video, like_video, dislike_video, change_profile,
-    delete_video_confirmation
+    delete_video_confirmation, search_view_mobile
     )
 
 urlpatterns = [
     path('', home, name="home"),
     path('search/', search, name="search"),
+    path('search-mobile/', search_view_mobile, name="search-mobile"),
     path('register/', register, name="register"),
     path('login/', login_page, name="login"),
     path('logout/', logout_page, name="logout"),

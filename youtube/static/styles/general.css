@@ -39,6 +39,10 @@ button:focus {
     color: rgb(9, 91, 197)
 }
 
+.message-container {
+    margin-top: 80px;
+}
+
 .message {
     text-align: center;
     margin: 0;

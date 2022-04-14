@@ -13,7 +13,7 @@
         <div class="video-preview">
             <div class="thumbnail-row">
                 <a href="{% url 'watch-video' video.id %}">
-                    <img class="thumbnail" src="{{ video.thumbnail.url }}">
+                    <img class="thumbnail" src="{{ video.get_thumbnail.url }}">
                     <div class="video-time">
                         {{ video.length }}
                     </div>

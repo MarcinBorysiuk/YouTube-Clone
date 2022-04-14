@@ -24,7 +24,7 @@ class Channel(AbstractUser):
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username']
 
-
+    '''
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
         img = Image.open(self.picture.path)
@@ -32,7 +32,7 @@ class Channel(AbstractUser):
         img_width = img.height
         img = img.resize((img_width, img.height))
         img.save(self.picture.path)
-
+    '''
 
     def __str__(self):
         return self.username
@@ -42,7 +42,7 @@ class Channel(AbstractUser):
 
     def get_picture_url(self):
         if self.picture:
-            return self.picture.url
+            return f"https://youtubue-uploads.s3.eu-central-1.amazonaws.com/{self.picture}"
         else:
             return '/media/no-profile/no-profile.jpg'
 
@@ -71,20 +71,28 @@ class Video(models.Model):
     def __repr__(self):
         return self.title
     
+    '''
     def save(self, *args, **kwargs):
-        super().save(*args, **kwargs)
-        if self.thumbnail != None:
-            img = Image.open(self.thumbnail.path)
-            if img.width <= 300:
-                img_width = int(img.width*3)
-                img_height = int(img_width/1.8)
-                img = img.resize((img_width, img_height))
-                img.save(self.thumbnail.path)
-            else:
-                img_height = int(img.width/1.8)
-                img = img.resize((img.width, img_height))
-                img.save(self.thumbnail.path)
+    super().save(*args, **kwargs)
+    if self.thumbnail != None:
+        img = Image.open(self.thumbnail.path)
+        if img.width <= 300:
+            img_width = int(img.width*3)
+            img_height = int(img_width/1.8)
+            img = img.resize((img_width, img_height))
+            img.save(self.thumbnail.path)
+        else:
+            img_height = int(img.width/1.8)
+            img = img.resize((img.width, img_height))
+            img.save(self.thumbnail.path)
+    '''
+   
         
+    def get_video_url(self):
+        return f"https://youtubue-uploads.s3.eu-central-1.amazonaws.com/{self.video}"
+
+    def get_thumbnail_url(self):
+        return f"https://youtubue-uploads.s3.eu-central-1.amazonaws.com/{self.thumbnail}"
         
     def delete(self, *args, **kwargs):
         self.video.delete()
@@ -92,7 +100,7 @@ class Video(models.Model):
         super().delete(*args, **kwargs)
 
     def get_duration(self):
-        duration = get_video_length(self.video.path)
+        duration = get_video_length(self.get_video_url())
         self.length = duration
         self.save()
 

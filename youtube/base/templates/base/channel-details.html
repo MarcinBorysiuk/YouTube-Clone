@@ -123,7 +123,7 @@
                 <div>
                     <a href="{% url 'watch-video' video.id %}">
                         <div class="channel-details-thumbnail-container">
-                            <img class="video-thumbnail" src="{{ video.thumbnail.url }}">
+                            <img class="video-thumbnail" src="{{ video.get_thumbnail_url }}">
                             <div class="channel-details-video-time">
                                 {{ video.length }}
                             </div>

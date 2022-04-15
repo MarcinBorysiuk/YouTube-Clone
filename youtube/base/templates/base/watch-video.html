@@ -9,7 +9,7 @@
 
 <div class="watch-video-container">
     <div class="video-container">
-        <video class="video" src="{{ video.video.url }}" type="video.mp4" controls></video>
+        <video class="video" src="{{ video.get_video_url }}" type="video.mp4" controls></video>
         <p class="watch-video-title">{{ video.title }}</p>
         <div class="watch-video-info-container">
             <div class="watch-video-info-item">
@@ -256,7 +256,7 @@
         <div class="side-video">
             <div class="side-video-thumbnail-container">
                 <a href="{% url 'watch-video' video.id %}">
-                    <img class="side-video-thumbnail" src="{{ video.thumbnail.url }}">
+                    <img class="side-video-thumbnail" src="{{ video.get_thumbnail_url }}">
                     <div class="side-video-time">
                         {{ video.length }}
                     </div>

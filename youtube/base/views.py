@@ -81,7 +81,7 @@ def search(request):
     videos = Video.objects.filter(
         Q(title__icontains=q)
         )
-    
+
     videos = sorted(videos, key=lambda video:video.views, reverse=True)
    
     context = {'videos': videos}
@@ -122,7 +122,6 @@ def upload_video(request):
         channel = request.user
 
         if validate_video_title(request, title, Video):
-            print(title)
             return redirect('upload-video')
 
         if validate_video_extension(video, request) and validate_thumbnail_extension(thumbnail, request) and validate_video_size(video, request):

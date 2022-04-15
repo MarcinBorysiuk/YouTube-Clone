@@ -21,7 +21,7 @@
 			<div class="search-view-video-grid">
 				<div>
 					<a href="{% url 'watch-video' video.id %}">
-						<img class="search-view-thumbnail" src="{{ video.thumbnail.url }}">
+						<img class="search-view-thumbnail" src="{{ video.get_thumbnail_url }}">
 					</a>
 				</div>
 				<div class="search-view-video-info">
@@ -55,7 +55,7 @@
 			<div class="no-results-container">
 				<div>
 					<img class="no-results-image"
-					src="https://cdn3.iconfinder.com/data/icons/search-engine-optimization-seo-3/320/loupe_magnifier_magnifying_search-512.png">
+					src="{% static 'icons/search-loupe.jpg' %}">
 					<p class="no-results-text">
 						Sorry...We couldn't find any results<br/>
 						Try again

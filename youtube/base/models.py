@@ -44,7 +44,7 @@ class Channel(AbstractUser):
         if self.picture:
             return f"https://youtubue-uploads.s3.eu-central-1.amazonaws.com/{self.picture}"
         else:
-            return '/media/no-profile/no-profile.jpg'
+            return f"https://youtubue-uploads.s3.eu-central-1.amazonaws.com/no-profile/no-profile.jpg"
 
     def get_subscribers_count(self):
         return self.subscribers.all().count()

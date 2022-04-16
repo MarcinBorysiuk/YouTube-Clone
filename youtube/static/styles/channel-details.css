@@ -19,7 +19,7 @@
 
 .channel-picture-container {
     height: 80px;
-    width: 80px;
+    aspect-ratio: 1/1;
     border-radius: 50%;
     margin-right: 25px;
     position: relative;
@@ -28,6 +28,7 @@
 
 .channel-picture {
     height: 80px;
+    aspect-ratio: 1/1;
     border-radius: 50%;
 }
 
@@ -243,7 +244,9 @@
 }
 
 .video-thumbnail {
-    width: 100%
+    width: 100%;
+    aspect-ratio: 16/9;
+    cursor: pointer;
 }
 
 .video-title {
@@ -288,6 +291,7 @@
 
 .subsrciption-channel-picture {
     width: 100%;
+    aspect-ratio: 1/1;
     max-width: 140px;
     border-radius: 50%;
     margin-bottom: 10px;

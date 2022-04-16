@@ -40,6 +40,7 @@
 
 .thumbnail {
     width: 100%;
+    aspect-ratio: 16/9;
     cursor: pointer;
 }
 
@@ -72,6 +73,7 @@
 
 .profile-picture {
     width: 36px;
+    aspect-ratio: 1/1;
     border-radius: 50%;
 }
 

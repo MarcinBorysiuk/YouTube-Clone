@@ -23,6 +23,7 @@
             <p class="upload-view-text">
                 We recommend that you use a photo with a size of at least 98 x 98 pixels and 4 MB or less. 
                 Use a PNG or JPG file . Make sure your photo complies with YouTube community guidelines.
+                For best quality of the photo, we recommend image in ratio 1:1 (for example 200x200)
             </p>
             <form method="POST" action="" enctype="multipart/form-data">
                 {% csrf_token %}
@@ -30,7 +31,7 @@
                     <input name="profile_picture" type="file" required>
                     Choose Picutre
                 </label>
-                <input class="profile-picture-upload" type="submit" value="Send Picture">
+                <input class="profile-picture-upload" type="submit" value="Save Picture">
             </form>
         </div>
     </div>

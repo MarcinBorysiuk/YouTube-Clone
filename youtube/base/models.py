@@ -5,6 +5,7 @@ from .helpers import get_video_length
 
 
 
+
 def video_directory_path(instance, filename):
     return "videos/channel_{0}/{1}".format(instance.channel.id, filename)
 
@@ -23,17 +24,7 @@ class Channel(AbstractUser):
     subscribers = models.ManyToManyField('Channel', blank=True, related_name='channel_subscriptions')
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username']
-
-    '''
-    def save(self, *args, **kwargs):
-        super().save(*args, **kwargs)
-        img = Image.open(self.picture.path)
-
-        img_width = img.height
-        img = img.resize((img_width, img.height))
-        img.save(self.picture.path)
-    '''
-
+    
     def __str__(self):
         return self.username
 
@@ -70,24 +61,7 @@ class Video(models.Model):
 
     def __repr__(self):
         return self.title
-    
-    '''
-    def save(self, *args, **kwargs):
-    super().save(*args, **kwargs)
-    if self.thumbnail != None:
-        img = Image.open(self.thumbnail.path)
-        if img.width <= 300:
-            img_width = int(img.width*3)
-            img_height = int(img_width/1.8)
-            img = img.resize((img_width, img_height))
-            img.save(self.thumbnail.path)
-        else:
-            img_height = int(img.width/1.8)
-            img = img.resize((img.width, img_height))
-            img.save(self.thumbnail.path)
-    '''
-   
-        
+           
     def get_video_url(self):
         return f"https://youtubue-uploads.s3.eu-central-1.amazonaws.com/{self.video}"
 

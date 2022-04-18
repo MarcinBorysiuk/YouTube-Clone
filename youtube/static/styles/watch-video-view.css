@@ -248,6 +248,11 @@
         padding: 0;
         z-index: 200;
     }
+    .video {
+        padding: 0;
+        z-index: 300;
+        position: fixed;
+    }
     .watch-video-title,
     .watch-video-info-container,
     .watch-video-channel-info,
@@ -258,6 +263,9 @@
         padding-left: 10px;
         padding-right: 10px
     }
+    .watch-video-title {
+        margin-top: 260px;
+    }
     .side-video {
         display: block;
         margin-bottom: 20px;
@@ -267,6 +275,7 @@
 @media(max-width: 950px) {
     .watch-video-container {
         padding-right: 0px;
+        grid-template-columns: 1fr;
     }
     .side-videos-sort {
         padding-top: 20px;
@@ -274,9 +283,6 @@
     }
     .side-video {
         grid-template-columns: 180px 1fr;
-    }
-    .watch-video-container {
-        grid-template-columns: 1fr;
     }
     .share-icon-container,
     .clip-icon-container,

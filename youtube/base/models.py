@@ -17,7 +17,7 @@ def profile_directory_path(instance, filename):
 
 
 class Channel(AbstractUser):
-    username = models.CharField(max_length=100, unique=True, null=True)
+    username = models.CharField(max_length=200, unique=True, null=True)
     email = models.EmailField(unique=True)
     picture = models.ImageField(upload_to=profile_directory_path, null=True, default='no-profile/no-profile.jpg')
     subscriptions = models.ManyToManyField('Channel', blank=True, related_name='channel_subscribers')
@@ -35,7 +35,7 @@ class Channel(AbstractUser):
         if self.picture:
             return f"https://youtubue-uploads.s3.eu-central-1.amazonaws.com/{self.picture}"
         else:
-            return f"https://youtubue-uploads.s3.eu-central-1.amazonaws.com/no-profile/no-profile.jpg"
+            return "https://youtubue-uploads.s3.eu-central-1.amazonaws.com/no-profile/no-profile.jpg"
 
     def get_subscribers_count(self):
         return self.subscribers.all().count()
@@ -46,7 +46,7 @@ class Channel(AbstractUser):
     
 class Video(models.Model):
     video = models.FileField(upload_to=video_directory_path, null=True)
-    title = models.CharField(max_length=60, unique=True)
+    title = models.CharField(max_length=200, unique=True)
     thumbnail = models.ImageField(upload_to=thumbnail_directory_path, null=True)
     description = models.TextField(null=True)
     length = models.CharField(max_length=20, null=True)

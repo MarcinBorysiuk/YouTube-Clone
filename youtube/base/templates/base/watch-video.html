@@ -126,9 +126,15 @@
         </div>
 
         <div class="comment-form-container">
-            <div class="comment-channel-picture-container">
-                <img class="comment-channel-picture" src="{{ request.user.get_picture_url }}">
-            </div>
+            {% if request.user.is_authenticated %}
+                <div class="comment-channel-picture-container">
+                    <img class="comment-channel-picture" src="{{ request.user.get_picture_url }}">
+                </div>
+            {% else %}
+                <div class="comment-channel-picture-container">
+                    <img class="comment-channel-picture" src="https://youtubue-uploads.s3.eu-central-1.amazonaws.com/no-profile/no-profile.jpg">
+                </div>
+            {% endif %}
             <div class="form-container">
                 <form method="POST" action="">
                     {% csrf_token %}

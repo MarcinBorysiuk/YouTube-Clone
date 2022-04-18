@@ -38,6 +38,12 @@
     }
 }
 
+@media (min-width: 1500px) {
+    .videos-grid {
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    }
+}
+
 .thumbnail {
     width: 100%;
     aspect-ratio: 16/9;

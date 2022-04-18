@@ -31,15 +31,16 @@
     
     
     {% if messages %}
+    <div class="message-container">
         {% for message in messages %}
-        <div class="message-container">
             <div class="alert alert-primary alert-dismissible fade show" role="alert">
                 <p class="message">{{ message }} </p>
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
-        </div>
         {% endfor %}
+    </div>
     {% endif %}
+    
     {% block content %}
     {% endblock %}
 
